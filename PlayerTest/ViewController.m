@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "MBHUDView.h"
 #import <AudioToolbox/AudioSession.h>
+#import "DRTools.h"
 
 @interface ViewController ()
 {
@@ -27,7 +28,10 @@
     
     UILabel * _timeLabel;                                   //显示时间的Label
     
-    UISlider * _volumeSlider;                                          //控制音量的按钮
+    UISlider * _volumeSlider;                             //控制音量的Slider
+    
+    UISlider * _playBackSlider;                          //播放进度的Slider
+    
 }
 @end
 
@@ -43,17 +47,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    //添加播放器
-    [self addPlayer];
-    
-    //添加暂停 播放  按钮
-    [self addButtons];
-    
-    //添加时间Label
-    [self addTimeLabel];
-    
-    //添加进度条
-    [self addVolumeSlider];
+    //添加页面Controllers
+    [self addControllers];
     
     //创建全局变量
     [self doInitDataSource];
@@ -75,10 +70,31 @@
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updatePlayTimes:) userInfo:nil repeats:YES];
     [_timer retain];
 }
+-(void)addControllers
+{
+    //添加播放器
+    [self addPlayer];
+    
+    //添加暂停 播放  按钮
+    [self addButtons];
+    
+    //添加时间Label
+    [self addTimeLabel];
+    
+    //添加播放的进度 slider
+    [self addPlayerBackSlider];
+    
+    //添加声音控制条
+    [self addVolumeSlider];
+    
+}
 #pragma 添加播放器
 -(void)addPlayer
 {
-    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
+    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
+    NSURL * url = [NSURL fileURLWithPath:path];
+    
+//    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
     CGFloat statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     NSLog(@"statusHeight is %f",statusHeight);
     
@@ -127,19 +143,32 @@
     _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, _moviePlayer.view.frame.size.height -100, 100, 100)];
     _timeLabel.textColor = [UIColor whiteColor];
     _timeLabel.backgroundColor = [UIColor clearColor];
-    _timeLabel.text = [NSString stringWithFormat:@"00|00"];
+    _timeLabel.text = [NSString stringWithFormat:@"00:00"];
     [self.view addSubview:_timeLabel];
 }
 -(void)addVolumeSlider
 {
     _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(900, _moviePlayer.view.frame.size.height -80, 100,50)];
-    [_volumeSlider setBackgroundColor:[UIColor whiteColor]];
     [_volumeSlider addTarget:self action:@selector(changeVolume:) forControlEvents:UIControlEventValueChanged];
     float volume = [MPMusicPlayerController applicationMusicPlayer].volume;
     _volumeSlider.value = volume;
     [self.view   addSubview:_volumeSlider];
 }
+-(void)addPlayerBackSlider
+{
+    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, _moviePlayer.view.frame.size.height - 150, 700,100)];
+    [_playBackSlider addTarget:self action:@selector(changePlayRate:) forControlEvents:UIControlEventValueChanged];
+    _playBackSlider.value = 0;
+    [self.view   addSubview:_playBackSlider];
+}
+
 #pragma 按钮响应事件
+-(void)changePlayRate:(id)sender
+{
+    UISlider * slider = (UISlider*)sender;
+    NSLog(@"slider.value is %f",slider.value);
+     _moviePlayer.currentPlaybackTime = _fullTime * slider.value;
+}
 -(void)changeVolume:(id)sender
 {
     NSLog(@"音量控制");
@@ -205,7 +234,7 @@
     //添加对声音大小的判断
     OSStatus s = AudioSessionAddPropertyListener(kAudioSessionProperty_CurrentHardwareOutputVolume,
                                                      audioVolumeChangeListenerCallback,
-                                                     _volumeSlider);
+                                                     self);
     if (s == kAudioSessionNoError) {
         NSLog(@"监听音量键成功");
     }
@@ -235,8 +264,8 @@ void audioVolumeChangeListenerCallback (void *inUserData,
     if (inPropertyID != kAudioSessionProperty_CurrentHardwareOutputVolume) return;
     Float32 value = *(Float32 *)inPropertyValue;
     NSLog(@"value is %f",value);
-    UISlider * volumeSlider = ( UISlider *) inUserData;
-    volumeSlider.value = value;
+    ViewController * viewController = (ViewController *) inUserData;
+    [viewController updatePlayBackVolume:value];
 }
 //声音的更新
 -(void)moviePlayVolumeChange:(NSNotification*)notification
@@ -245,11 +274,6 @@ void audioVolumeChangeListenerCallback (void *inUserData,
     _volumeSlider.value = volume;
 }
 
-//时间的更新
--(void)moviePlayBackTimeDidChange:(NSNotification*)notification
-{
-   
-}
 /*  Notification called when the movie finished playing. */
 - (void) moviePlayBackDidFinish:(NSNotification*)notification
 {
@@ -273,8 +297,8 @@ void audioVolumeChangeListenerCallback (void *inUserData,
             /* An error was encountered during playback. */
 		case MPMovieFinishReasonPlaybackError:
             NSLog(@"An error was encountered during playback");
-            [self performSelectorOnMainThread:@selector(displayError:) withObject:[[notification userInfo] objectForKey:@"error"]
-                                waitUntilDone:NO];
+//            [self performSelectorOnMainThread:@selector(displayError:) withObject:[[notification userInfo] objectForKey:@"error"]
+//                                waitUntilDone:NO];
             _isPause = YES;
             _isPlaying = NO;
 			break;
@@ -329,7 +353,7 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 	{
         _isPause = YES;
         _isPlaying = NO;
-        [MBHUDView hudWithBody:@"加载中" type:MBAlertViewHUDTypeActivityIndicator hidesAfter:-1 show:YES];
+        [MBHUDView hudWithBody:@"加载中" type:MBAlertViewHUDTypeActivityIndicator hidesAfter:30 show:YES];
 	}
 }
 
@@ -384,9 +408,14 @@ void audioVolumeChangeListenerCallback (void *inUserData,
         playingTime = [NSNumber numberWithFloat:player.currentPlaybackTime];
         _fullTime = [fullTime intValue];
         _playingTime = [playingTime intValue];
-        NSLog(@"_fullTime is %d,_playingTime is %d",_fullTime,_playingTime);
-        _timeLabel.text = [NSString stringWithFormat:@"%d|%d",_playingTime,_fullTime];
+         
+        NSString * fullTimeString = [DRTools transSecondToTime:_fullTime];
+        NSString * playTimeString = [DRTools transSecondToTime:_playingTime];
+        _timeLabel.text = [NSString stringWithFormat:@"%@|%@",playTimeString,fullTimeString];
+        
+        float rate = (float)(_playingTime)/(_fullTime);
         NSLog(@"进度 %f",(float)(_playingTime)/(_fullTime));
+        [self updatePlayBackSlider:rate];
         
         NSLog(@"可以播的时间 %f",player.playableDuration);
     }
@@ -394,13 +423,19 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 #pragma 刷新播放完时间的归位
 -(void)playEndUpdate:(NSNumber*)playTime
 {
-    _timeLabel.text = @"00|00";
+    NSString * fullTimeString = [DRTools transSecondToTime:_fullTime];
+    _timeLabel.text = [NSString stringWithFormat:@"00:00|%@",fullTimeString];
+    _playBackSlider.value = 0;
 }
 
 #pragma 刷新音量控制
 -(void)updatePlayBackVolume:(float)volume
 {
-    
+    _volumeSlider.value = volume;
+}
+-(void)updatePlayBackSlider:(float)value
+{
+    _playBackSlider.value =value;
 }
 
 

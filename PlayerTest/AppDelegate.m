@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "DRTools.h"
+
+#define Test_Time 60*60+61
 
 @implementation AppDelegate
 
@@ -25,6 +28,9 @@
     // Override point for customization after application launch.
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
     self.window.rootViewController = self.viewController;
+    
+//    NSString * timeString = [DRTools transSecondToTime:Test_Time];
+//    NSLog(@"timeString is %@",timeString);
     [self.window makeKeyAndVisible];
     return YES;
 }
