@@ -34,6 +34,10 @@
     
     BOOL _isFullScreen;                                    //是否全屏
     
+    BOOL _isMute;                                              //是否静音
+        
+    float _volume;                                                //当前音量
+    
     NSTimer * _timer;                                         //刷新界面的定时器
     
     UILabel * _timeLabel;                                   //显示时间的Label
@@ -48,7 +52,10 @@
     
     UIView * _middleAskView;                          //中间提问的按钮
     
-    UIButton * _playButton;
+    UIButton * _playButton;                                //播放按钮
+
+    UIButton * _muteButton;                               //静音Button
+    
 }
 @end
 
@@ -56,6 +63,7 @@
 #pragma mark 生命周期
 - (void)dealloc
 {
+    RELEASE_SAFELY(_muteButton);
     RELEASE_SAFELY(_moviePlayer);
     RELEASE_SAFELY(_timer);
     RELEASE_SAFELY(_timeLabel);
@@ -91,6 +99,9 @@
     _isPause = YES;
     _isPlaying = NO;
     _isFullScreen = NO;
+    _isMute = NO;
+    
+    _volume = [MPMusicPlayerController applicationMusicPlayer].volume;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updatePlayTimes:) userInfo:nil repeats:YES];
     [_timer retain];
@@ -114,6 +125,10 @@
     
     //添加播放的进度 slider
     [self addPlayerBackSlider];
+    
+    
+    //添加静音button
+    [self  addMuteButton];
     
     //添加声音控制条
     [self addVolumeSlider];
@@ -184,26 +199,20 @@
 }
 #pragma mark 自定义的按钮
 -(void)addButtons
-{
-//    UIButton * pauseButton  = [[UIButton alloc] initWithFrame:CGRectMake(350, 60,100, 50)];
-//    [pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
-//    [pauseButton addTarget:self action:@selector(pauseCilcked:) forControlEvents:UIControlEventTouchUpInside];
-//    [_bottomToolView addSubview:pauseButton];
-//    [pauseButton release];
-    
-    _playButton  = [[UIButton alloc] initWithFrame:CGRectMake(600, 60,100, 50)];
+{    
+    _playButton  = [[UIButton alloc] initWithFrame:CGRectMake(500, 60,100, 50)];
      [_playButton setTitle:@"播放" forState:UIControlStateNormal];
     [_playButton addTarget:self action:@selector(playCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:_playButton];
     
-    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(200,60,100, 50)];
+    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(400,60,100, 50)];
     [seekingBackButton setTitle:@"快退" forState:UIControlStateNormal];
     [seekingBackButton addTarget:self action:@selector(seekingBackCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:seekingBackButton];
     [seekingBackButton release];
 
     
-    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(700, 60,100, 50)];
+    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(600, 60,100, 50)];
     [seekingForwardButton setTitle:@"快进" forState:UIControlStateNormal];
     [seekingForwardButton addTarget:self action:@selector(seekingForwardCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:seekingForwardButton];
@@ -215,9 +224,18 @@
     _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 60, 100, 50)];
     _timeLabel.textColor = [UIColor whiteColor];
     _timeLabel.backgroundColor = [UIColor clearColor];
-    _timeLabel.text = [NSString stringWithFormat:@"00:00"];
+    _timeLabel.text = [NSString stringWithFormat:@"00:00|00:00"];
     [_bottomToolView addSubview:_timeLabel];
 }
+#pragma mark 添加静音Button
+-(void)addMuteButton
+{
+    _muteButton = [[UIButton alloc] initWithFrame:CGRectMake(800, 60, 60, 60)];
+    [_muteButton setTitle:@"静音" forState:UIControlStateNormal];
+    [_muteButton addTarget:self action:@selector(muteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomToolView addSubview:_muteButton];
+}
+
 #pragma mark 添加显示音量的Slider
 -(void)addVolumeSlider
 {
@@ -317,12 +335,39 @@
     [_moviePlayer prepareToPlay];
     [_moviePlayer play];
 }
+-(void)muteButtonClicked:(id)sender
+{
+    UIButton * muteButton = (UIButton*)sender;
+    if (_isMute) {
+        _isMute = NO;
+        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:_volume];
+        [self updatePlayBackVolume:_volume];
+    }
+else{
+        _isMute = YES;
+        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
+        [self updatePlayBackVolume:0];
+    }
+    if(_volume <= 0){
+         [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+    }
+}
 -(void)changeVolume:(id)sender
 {
     NSLog(@"音量控制");
     UISlider * slider = (UISlider*)sender;
     NSLog(@"slider.value is %f",slider.value);
+    _volume = slider.value;
     [[MPMusicPlayerController applicationMusicPlayer] setVolume:slider.value];
+    
+    if (_volume > 0) {
+        [self updateMuteButton:_muteButton muteOrNot:NO];
+    }
+    else{
+        [self updateMuteButton:_muteButton muteOrNot:YES];
+    }
 }
 -(void)pauseCilcked:(id)sender
 {
@@ -588,6 +633,20 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 -(void)updatePlayBackVolume:(float)volume
 {
     _volumeSlider.value = volume;
+}
+-(void)updateMuteButton:(UIButton*)muteButton muteOrNot:(BOOL)mute
+{
+    if (mute) {
+        _isMute = NO;
+        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
+        [self updatePlayBackVolume:0];
+    }
+    else{
+        _isMute = YES;
+        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+        [self updatePlayBackVolume:_volume];
+    }
 }
 -(void)updatePlayBackSlider:(float)value
 {
