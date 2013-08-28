@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#define RELEASE_SAFELY(__POINTER) { if(__POINTER) {[__POINTER release]; __POINTER = nil; }}
 
 @interface DRTools : NSObject
 +(NSString*) transSecondToTime:(int)seconds;
