@@ -12,6 +12,14 @@
 #import <AudioToolbox/AudioSession.h>
 #import "DRTools.h"
 
+
+#define Top_Nav_Height  70
+
+#define Bottom_Tool_Height   120
+
+
+#define Appear_Time 0.8f
+
 @interface ViewController ()
 {
     MPMoviePlayerController * _moviePlayer;  //播放器
@@ -24,6 +32,8 @@
     
     BOOL _isPause;                                           //当前暂停或未播放
     
+    BOOL _isFullScreen;                                    //是否全屏
+    
     NSTimer * _timer;                                         //刷新界面的定时器
     
     UILabel * _timeLabel;                                   //显示时间的Label
@@ -31,7 +41,10 @@
     UISlider * _volumeSlider;                             //控制音量的Slider
     
     UISlider * _playBackSlider;                          //播放进度的Slider
+        
+    UIView * _topNavView;                               //导航上边的view
     
+    UIView * _bottomToolView;                         //功能条下边的view
 }
 @end
 
@@ -66,6 +79,7 @@
 {
     _isPause = YES;
     _isPlaying = NO;
+    _isFullScreen = YES;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updatePlayTimes:) userInfo:nil repeats:YES];
     [_timer retain];
@@ -75,6 +89,12 @@
     //添加播放器
     [self addPlayer];
     
+    //添加上边的导航View
+    [self addNavView];
+    
+    //添加下边的BottomView
+    [self addBottomToolView];
+
     //添加暂停 播放  按钮
     [self addButtons];
     
@@ -88,13 +108,49 @@
     [self addVolumeSlider];
     
 }
+#pragma 添加导航的NavView
+-(void)addNavView
+{
+    _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - Top_Nav_Height, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+    NSLog(@"_topNavView.frame is %@",NSStringFromCGRect(_topNavView.frame));
+    NSLog(@"self.view.frame is %@",NSStringFromCGRect(self.view.frame));
+    UIButton * popButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [popButton   setTitle:@"返回" forState:UIControlStateNormal];
+    [popButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [popButton addTarget:self action:@selector(dissmissSelf:) forControlEvents:UIControlEventTouchUpInside];
+    popButton.frame = CGRectMake(30, 15, 50, 35);
+    [_topNavView addSubview:popButton];
+    
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 20, self.view.frame.size.height - 2 * 200, 30)];
+    titleLabel.center = _topNavView.center;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"等式的加减法则运用";
+    titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    [_topNavView addSubview:titleLabel];
+    [titleLabel release];
+    
+   [_topNavView setBackgroundColor:[UIColor blackColor]];
+    [_topNavView setAlpha:0.7];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:_topNavView];
+   [self.view addSubview:_topNavView];
+}
+#pragma 添加下边的BottomToolView
+-(void)addBottomToolView
+{
+    _bottomToolView = [[UIView alloc] initWithFrame:CGRectMake(0, _moviePlayer.view.frame.size.height,_moviePlayer.view.frame.size.width, Bottom_Tool_Height)];
+    [_bottomToolView setBackgroundColor:[UIColor blackColor]];
+    [_bottomToolView setAlpha:0.7];
+    [self.view addSubview:_bottomToolView];
+}
 #pragma 添加播放器
 -(void)addPlayer
 {
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
-    NSURL * url = [NSURL fileURLWithPath:path];
+//    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
+//    NSURL * url = [NSURL fileURLWithPath:path];
     
-//    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
+    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
     CGFloat statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     NSLog(@"statusHeight is %f",statusHeight);
     
@@ -102,6 +158,12 @@
                     initWithContentURL:url];
     [[_moviePlayer view] setFrame:CGRectMake(0, 0, self.view.frame.size.height+statusHeight, self.view.frame.size.width)];
     
+    UITapGestureRecognizer *playGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(playFullScreenOrNot:)];
+    playGesture.delegate = self;
+  _moviePlayer.view.userInteractionEnabled = YES;
+    [_moviePlayer.view addGestureRecognizer:playGesture];
+    [playGesture release];
+
     [_moviePlayer setFullscreen:YES animated:YES];
     [self.view addSubview:_moviePlayer.view];
     
@@ -113,61 +175,105 @@
 #pragma 自定义的按钮
 -(void)addButtons
 {
-    UIButton * pauseButton  = [[UIButton alloc] initWithFrame:CGRectMake(350, _moviePlayer.view.frame.size.height - 100,100, 100)];
+    UIButton * pauseButton  = [[UIButton alloc] initWithFrame:CGRectMake(350, 60,100, 50)];
     [pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
     [pauseButton addTarget:self action:@selector(pauseCilcked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:pauseButton];
+    [_bottomToolView addSubview:pauseButton];
     [pauseButton release];
     
-    UIButton * playButton  = [[UIButton alloc] initWithFrame:CGRectMake(500, _moviePlayer.view.frame.size.height - 100,100, 100)];
+    UIButton * playButton  = [[UIButton alloc] initWithFrame:CGRectMake(500, 60,100, 50)];
      [playButton setTitle:@"播放" forState:UIControlStateNormal];
     [playButton addTarget:self action:@selector(playCilcked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:playButton];
+    [_bottomToolView addSubview:playButton];
     [playButton release];
     
-    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(200, _moviePlayer.view.frame.size.height - 100,100, 100)];
+    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(200,60,100, 50)];
     [seekingBackButton setTitle:@"快退" forState:UIControlStateNormal];
     [seekingBackButton addTarget:self action:@selector(seekingBackCilcked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:seekingBackButton];
+    [_bottomToolView addSubview:seekingBackButton];
     [seekingBackButton release];
 
     
-    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(700, _moviePlayer.view.frame.size.height - 100,100, 100)];
+    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(700, 60,100, 50)];
     [seekingForwardButton setTitle:@"快进" forState:UIControlStateNormal];
     [seekingForwardButton addTarget:self action:@selector(seekingForwardCilcked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:seekingForwardButton];
+    [_bottomToolView addSubview:seekingForwardButton];
     [seekingForwardButton release];
 }
 -(void)addTimeLabel
 {
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, _moviePlayer.view.frame.size.height -100, 100, 100)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 60, 100, 50)];
     _timeLabel.textColor = [UIColor whiteColor];
     _timeLabel.backgroundColor = [UIColor clearColor];
     _timeLabel.text = [NSString stringWithFormat:@"00:00"];
-    [self.view addSubview:_timeLabel];
+    [_bottomToolView addSubview:_timeLabel];
 }
 -(void)addVolumeSlider
 {
-    _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(900, _moviePlayer.view.frame.size.height -80, 100,50)];
+    _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(900, 60, 100,50)];
     [_volumeSlider addTarget:self action:@selector(changeVolume:) forControlEvents:UIControlEventValueChanged];
     float volume = [MPMusicPlayerController applicationMusicPlayer].volume;
     _volumeSlider.value = volume;
-    [self.view   addSubview:_volumeSlider];
+    [_bottomToolView   addSubview:_volumeSlider];
 }
 -(void)addPlayerBackSlider
 {
-    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, _moviePlayer.view.frame.size.height - 150, 700,100)];
+    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, 700,40)];
     [_playBackSlider addTarget:self action:@selector(changePlayRate:) forControlEvents:UIControlEventValueChanged];
     _playBackSlider.value = 0;
-    [self.view   addSubview:_playBackSlider];
+    [_bottomToolView   addSubview:_playBackSlider];
 }
-
+-(void)dissmissSelf:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)topNavViewAppear
+{
+    CGRect startFrame = CGRectMake(0, 0-Top_Nav_Height, _topNavView.frame.size.width, Top_Nav_Height);
+    CGRect endFrame = CGRectMake(0, 0, _topNavView.frame.size.width, Top_Nav_Height);
+    [DRTools appearViewAnimationWithView:_topNavView duration:Appear_Time startFrame:startFrame endFrame:endFrame animationName:nil delegate:self];
+}
+-(void)topNavViewHidden
+{
+    CGRect endFrame = CGRectMake(0, 0-Top_Nav_Height, _topNavView.frame.size.width, Top_Nav_Height);
+    CGRect startFrame = CGRectMake(0, 0, _topNavView.frame.size.width, Top_Nav_Height);
+    [DRTools appearViewAnimationWithView:_topNavView duration:Appear_Time startFrame:startFrame endFrame:endFrame animationName:nil delegate:self];
+}
+-(void)bottomToolViewAppear
+{
+     CGRect startFrame = CGRectMake(0, _moviePlayer.view.frame.size.height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
+    CGRect endFrame = CGRectMake(0, _moviePlayer.view.frame.size.height-Bottom_Tool_Height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
+    [DRTools appearViewAnimationWithView:_bottomToolView duration:Appear_Time startFrame:startFrame endFrame:endFrame animationName:nil delegate:self];
+}
+-(void)bottomToolViewHidden
+{
+    CGRect endFrame = CGRectMake(0, _moviePlayer.view.frame.size.height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
+    CGRect startFrame = CGRectMake(0, _moviePlayer.view.frame.size.height-Bottom_Tool_Height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
+    [DRTools appearViewAnimationWithView:_bottomToolView duration:Appear_Time startFrame:startFrame endFrame:endFrame animationName:nil delegate:self];
+}
 #pragma 按钮响应事件
+-(void)playFullScreenOrNot:(id)sender
+{
+    if (_isFullScreen) {
+        _isFullScreen = NO;
+        NSLog(@"_isFullScreen is YES");
+        [self topNavViewAppear];
+        [self bottomToolViewAppear];
+    }
+    else{
+        NSLog(@"_isFullScreen is NO");
+        _isFullScreen = YES;
+        [self topNavViewHidden];
+        [self bottomToolViewHidden];
+    }
+}
 -(void)changePlayRate:(id)sender
 {
     UISlider * slider = (UISlider*)sender;
     NSLog(@"slider.value is %f",slider.value);
      _moviePlayer.currentPlaybackTime = _fullTime * slider.value;
+    [_moviePlayer prepareToPlay];
+    [_moviePlayer play];
 }
 -(void)changeVolume:(id)sender
 {
@@ -437,6 +543,14 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 {
     _playBackSlider.value =value;
 }
-
+ #pragma mark - gesture delegate
+// this allows you to dispatch touches
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
+// this enables you to handle multiple recognizers on single view
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
 
 @end
