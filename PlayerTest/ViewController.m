@@ -11,6 +11,8 @@
 #import "MBHUDView.h"
 #import <AudioToolbox/AudioSession.h>
 #import "DRTools.h"
+#import "QuestionView.h"
+#import "LeftQuestionView.h"
 
 #define Top_Nav_Height  70
 
@@ -35,7 +37,9 @@
     BOOL _isFullScreen;                                    //是否全屏
     
     BOOL _isMute;                                              //是否静音
-        
+    
+    BOOL _leftViewPushed;                               //左边思考问题页面是否展现
+    
     float _volume;                                                //当前音量
     
     NSTimer * _timer;                                         //刷新界面的定时器
@@ -54,8 +58,12 @@
     
     UIButton * _playButton;                                //播放按钮
 
-    UIButton * _muteButton;                               //静音Button
+    UIButton * _muteButton;                               //静音Button\
     
+    
+    UIButton * _thinkButton;                                 //思考Button\
+    
+    LeftQuestionView *  _questionView;                              //问题View
 }
 @end
 
@@ -79,11 +87,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    //添加页面Controllers
-    [self addControllers];
-    
     //创建全局变量
     [self doInitDataSource];
+    
+    //添加页面Controllers
+    [self addControllers];
     
     //添加通知
     [self  installMovieNotificationObservers];
@@ -100,6 +108,7 @@
     _isPlaying = NO;
     _isFullScreen = NO;
     _isMute = NO;
+    _leftViewPushed = YES;
     
     _volume = [MPMusicPlayerController applicationMusicPlayer].volume;
     
@@ -133,6 +142,12 @@
     //添加声音控制条
     [self addVolumeSlider];
     
+    //添加思考问题View
+    [self addQuestionView];
+    
+    //添加思考问题旁边的Button
+    [self addThinkButton];
+    
     //添加提问的框
     [self addAskView];
     
@@ -140,7 +155,12 @@
 #pragma mark 添加导航的NavView
 -(void)addNavView
 {
-    _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+    if (_isFullScreen) {
+         _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - Top_Nav_Height, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+    }
+    else{
+         _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+    }
     UIButton * popButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [popButton   setTitle:@"返回" forState:UIControlStateNormal];
     [popButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -165,7 +185,12 @@
 #pragma mark 添加下边的BottomToolView
 -(void)addBottomToolView
 {
-    _bottomToolView = [[UIView alloc] initWithFrame:CGRectMake(0, _moviePlayer.view.frame.size.height-Bottom_Tool_Height,_moviePlayer.view.frame.size.width, Bottom_Tool_Height)];
+    if (_isFullScreen) {
+        _bottomToolView = [[UIView alloc] initWithFrame:CGRectMake(0, _moviePlayer.view.frame.size.height,_moviePlayer.view.frame.size.width, Bottom_Tool_Height)];
+    }
+    else{
+        _bottomToolView = [[UIView alloc] initWithFrame:CGRectMake(0, _moviePlayer.view.frame.size.height-Bottom_Tool_Height,_moviePlayer.view.frame.size.width, Bottom_Tool_Height)];
+    }
     [_bottomToolView setBackgroundColor:[UIColor blackColor]];
     [_bottomToolView setAlpha:TopViewAlpha];
     [self.view addSubview:_bottomToolView];
@@ -173,10 +198,10 @@
 #pragma mark 添加播放器
 -(void)addPlayer
 {
-    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
-    NSURL * url = [NSURL fileURLWithPath:path];
+//    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
+//    NSURL * url = [NSURL fileURLWithPath:path];
     
-//    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
+    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
     CGFloat statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     
 	_moviePlayer = [[MPMoviePlayerController alloc]
@@ -253,6 +278,7 @@
     _playBackSlider.value = 0;
     [_bottomToolView   addSubview:_playBackSlider];
 }
+#pragma mark 添加右侧提问按钮
 -(void)addAskView
 {
     UIView * askView = [[UIView alloc] initWithFrame:CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200)];
@@ -272,6 +298,72 @@
     [askView setAlpha:TopViewAlpha];
     [self.view addSubview:askView];
 }
+#pragma mark 添加左侧的问题View
+-(void)addQuestionView
+{
+    if (_leftViewPushed) {
+             _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(0, 100, 300, 500)];
+    }
+    else{
+            _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(-300, 100, 300, 500)];
+    }
+    [_questionView setBackgroundColor:[UIColor blackColor]];
+    [_questionView setAlpha:TopViewAlpha];
+    NSMutableArray * array = [NSMutableArray arrayWithCapacity:10];
+    [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
+    
+    [_questionView updateQuestionInfo:array];
+    [self.view addSubview:_questionView];
+    
+}
+#pragma mark 添加左侧可以点击的Button
+-(void)addThinkButton
+{
+    _thinkButton = [[UIButton alloc] initWithFrame:CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60)];
+    [_thinkButton setTitle:@"拉起来" forState:UIControlStateNormal];
+    [_thinkButton setBackgroundColor:[UIColor blackColor]];
+    [_thinkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_thinkButton addTarget:self action:@selector(thinkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_thinkButton];
+
+}
+#pragma mark 左侧可以收起的按钮
+-(void)thinkButtonClicked:(id)sender
+{
+    if (_leftViewPushed) {
+        _leftViewPushed = NO;
+        [self leftViewHidden];
+    }
+    else{
+        _leftViewPushed = YES;
+        [self leftViewAppear];
+    }
+}
+-(void)leftViewAppear
+{
+    CGRect thinkButtonStartFrame = CGRectMake(0,_questionView.center.y - 60/2, 60, 60);
+    CGRect thinkButtonEndFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60);
+    [DRTools appearViewAnimationWithView:_thinkButton duration:Appear_Time startFrame:thinkButtonStartFrame endFrame:thinkButtonEndFrame animationName:nil delegate:self];
+
+    CGRect questionViewStartFrame = CGRectMake(-300, 100, 300, 500);
+    CGRect  questionViewEndFrame = CGRectMake(0, 100, 300, 500);
+    [DRTools appearViewAnimationWithView:_questionView duration:Appear_Time startFrame:questionViewStartFrame endFrame:questionViewEndFrame animationName:nil delegate:self];
+}
+-(void)leftViewHidden
+{
+    CGRect thinkButtonStartFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60);
+    CGRect thinkButtonEndFrame = CGRectMake(0,_questionView.center.y - 60/2, 60, 60);
+    [DRTools appearViewAnimationWithView:_thinkButton duration:Appear_Time startFrame:thinkButtonStartFrame endFrame:thinkButtonEndFrame animationName:nil delegate:self];
+    
+    CGRect questionViewStartFrame = CGRectMake(0, 100, 300, 500);
+    CGRect  questionViewEndFrame = CGRectMake(-300, 100, 300, 500);
+    [DRTools appearViewAnimationWithView:_questionView duration:Appear_Time startFrame:questionViewStartFrame endFrame:questionViewEndFrame animationName:nil delegate:self];
+}
+
 #pragma mark   右侧提问与查看答疑的
 -(void)askButtonClicked:(id)sender
 {
@@ -317,14 +409,30 @@
     if (_isFullScreen) {
         _isFullScreen = NO;
         NSLog(@"_isFullScreen is YES");
+        
         [self topNavViewAppear];
         [self bottomToolViewAppear];
+        if (_leftViewPushed) {
+            
+        }
+        else{
+            [self leftViewAppear];
+        }
+        _leftViewPushed = YES;
     }
     else{
         NSLog(@"_isFullScreen is NO");
         _isFullScreen = YES;
         [self topNavViewHidden];
         [self bottomToolViewHidden];
+        if (_leftViewPushed) {
+            [self leftViewHidden];
+        }
+        else{
+            
+        }
+        _leftViewPushed = NO;
+        
     }
 }
 -(void)changePlayRate:(id)sender

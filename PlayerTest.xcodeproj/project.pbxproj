@@ -33,6 +33,10 @@
 		958650D717CC3B1F000DD252 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958650D617CC3B1F000DD252 /* QuartzCore.framework */; };
 		958650D917CC94FC000DD252 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 958650D817CC94FC000DD252 /* AudioToolbox.framework */; };
 		958650DC17CCADE7000DD252 /* DRTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 958650DB17CCADE7000DD252 /* DRTools.m */; };
+		9586511E17CEDF23000DD252 /* QuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586511D17CEDF23000DD252 /* QuestionView.m */; };
+		9586512117CEDFB4000DD252 /* MCTopAligningLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512017CEDFB4000DD252 /* MCTopAligningLabel.m */; };
+		9586512517CEE2C9000DD252 /* UILabel+CalHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */; };
+		9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512717CEED28000DD252 /* LeftQuestionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +83,14 @@
 		958650D817CC94FC000DD252 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		958650DA17CCADE7000DD252 /* DRTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTools.h; sourceTree = "<group>"; };
 		958650DB17CCADE7000DD252 /* DRTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTools.m; sourceTree = "<group>"; };
+		9586511C17CEDF23000DD252 /* QuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionView.h; sourceTree = "<group>"; };
+		9586511D17CEDF23000DD252 /* QuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionView.m; sourceTree = "<group>"; };
+		9586512017CEDFB4000DD252 /* MCTopAligningLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTopAligningLabel.m; sourceTree = "<group>"; };
+		9586512217CEE297000DD252 /* MCTopAligningLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTopAligningLabel.h; sourceTree = "<group>"; };
+		9586512317CEE2C9000DD252 /* UILabel+CalHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CalHeight.h"; sourceTree = "<group>"; };
+		9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CalHeight.m"; sourceTree = "<group>"; };
+		9586512617CEED28000DD252 /* LeftQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftQuestionView.h; sourceTree = "<group>"; };
+		9586512717CEED28000DD252 /* LeftQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftQuestionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +144,8 @@
 		9535689817CAE98C00F10339 /* PlayerTest */ = {
 			isa = PBXGroup;
 			children = (
+				9586511C17CEDF23000DD252 /* QuestionView.h */,
+				9586511D17CEDF23000DD252 /* QuestionView.m */,
 				958650DA17CCADE7000DD252 /* DRTools.h */,
 				958650DB17CCADE7000DD252 /* DRTools.m */,
 				954F2E1C17CB61CC00E0ED31 /* IMG_0024.MOV */,
@@ -163,7 +177,13 @@
 		958650B417CC39C8000DD252 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				9586512317CEE2C9000DD252 /* UILabel+CalHeight.h */,
+				9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */,
+				9586512217CEE297000DD252 /* MCTopAligningLabel.h */,
+				9586512017CEDFB4000DD252 /* MCTopAligningLabel.m */,
 				958650B517CC39C8000DD252 /* MBAlertView */,
+				9586512617CEED28000DD252 /* LeftQuestionView.h */,
+				9586512717CEED28000DD252 /* LeftQuestionView.m */,
 			);
 			name = "第三方库";
 			path = "PlayerTest/第三方库";
@@ -301,6 +321,10 @@
 				958650D417CC39C8000DD252 /* MBCheckMarkView.m in Sources */,
 				958650D517CC39C8000DD252 /* MBSpinningCircle.m in Sources */,
 				958650DC17CCADE7000DD252 /* DRTools.m in Sources */,
+				9586511E17CEDF23000DD252 /* QuestionView.m in Sources */,
+				9586512117CEDFB4000DD252 /* MCTopAligningLabel.m in Sources */,
+				9586512517CEE2C9000DD252 /* UILabel+CalHeight.m in Sources */,
+				9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
