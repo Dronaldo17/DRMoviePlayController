@@ -37,6 +37,14 @@
 		9586512117CEDFB4000DD252 /* MCTopAligningLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512017CEDFB4000DD252 /* MCTopAligningLabel.m */; };
 		9586512517CEE2C9000DD252 /* UILabel+CalHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */; };
 		9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512717CEED28000DD252 /* LeftQuestionView.m */; };
+		9586512B17CF36DC000DD252 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586512A17CF36DC000DD252 /* PopoverView.m */; };
+		9586513317CF4C3E000DD252 /* playVC_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586512D17CF4C3E000DD252 /* playVC_Back.png */; };
+		9586513417CF4C3E000DD252 /* playVC_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586512E17CF4C3E000DD252 /* playVC_pause.png */; };
+		9586513517CF4C3E000DD252 /* playVC_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586512F17CF4C3E000DD252 /* playVC_play.png */; };
+		9586513617CF4C3E000DD252 /* playVC_pullButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513017CF4C3E000DD252 /* playVC_pullButton.png */; };
+		9586513717CF4C3E000DD252 /* playVC_seekBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513117CF4C3E000DD252 /* playVC_seekBack.png */; };
+		9586513817CF4C3E000DD252 /* playVC_seekForward.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513217CF4C3E000DD252 /* playVC_seekForward.png */; };
+		9586513A17CF4E32000DD252 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9586513917CF4E32000DD252 /* video.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +99,15 @@
 		9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CalHeight.m"; sourceTree = "<group>"; };
 		9586512617CEED28000DD252 /* LeftQuestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftQuestionView.h; sourceTree = "<group>"; };
 		9586512717CEED28000DD252 /* LeftQuestionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftQuestionView.m; sourceTree = "<group>"; };
+		9586512917CF36DB000DD252 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		9586512A17CF36DC000DD252 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		9586512D17CF4C3E000DD252 /* playVC_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_Back.png; sourceTree = "<group>"; };
+		9586512E17CF4C3E000DD252 /* playVC_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_pause.png; sourceTree = "<group>"; };
+		9586512F17CF4C3E000DD252 /* playVC_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_play.png; sourceTree = "<group>"; };
+		9586513017CF4C3E000DD252 /* playVC_pullButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_pullButton.png; sourceTree = "<group>"; };
+		9586513117CF4C3E000DD252 /* playVC_seekBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_seekBack.png; sourceTree = "<group>"; };
+		9586513217CF4C3E000DD252 /* playVC_seekForward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_seekForward.png; sourceTree = "<group>"; };
+		9586513917CF4E32000DD252 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +130,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				9586512C17CF4C3E000DD252 /* 图片资源 */,
 				958650B417CC39C8000DD252 /* 第三方库 */,
 				9535689817CAE98C00F10339 /* PlayerTest */,
 				9535689117CAE98C00F10339 /* Frameworks */,
@@ -144,6 +162,7 @@
 		9535689817CAE98C00F10339 /* PlayerTest */ = {
 			isa = PBXGroup;
 			children = (
+				9586513917CF4E32000DD252 /* video.mp4 */,
 				9586511C17CEDF23000DD252 /* QuestionView.h */,
 				9586511D17CEDF23000DD252 /* QuestionView.m */,
 				958650DA17CCADE7000DD252 /* DRTools.h */,
@@ -177,6 +196,8 @@
 		958650B417CC39C8000DD252 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				9586512917CF36DB000DD252 /* PopoverView.h */,
+				9586512A17CF36DC000DD252 /* PopoverView.m */,
 				9586512317CEE2C9000DD252 /* UILabel+CalHeight.h */,
 				9586512417CEE2C9000DD252 /* UILabel+CalHeight.m */,
 				9586512217CEE297000DD252 /* MCTopAligningLabel.h */,
@@ -240,6 +261,20 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		9586512C17CF4C3E000DD252 /* 图片资源 */ = {
+			isa = PBXGroup;
+			children = (
+				9586512D17CF4C3E000DD252 /* playVC_Back.png */,
+				9586512E17CF4C3E000DD252 /* playVC_pause.png */,
+				9586512F17CF4C3E000DD252 /* playVC_play.png */,
+				9586513017CF4C3E000DD252 /* playVC_pullButton.png */,
+				9586513117CF4C3E000DD252 /* playVC_seekBack.png */,
+				9586513217CF4C3E000DD252 /* playVC_seekForward.png */,
+			);
+			name = "图片资源";
+			path = "PlayerTest/图片资源";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,6 +333,13 @@
 				953568AF17CAE98C00F10339 /* ViewController.xib in Resources */,
 				953568BC17CB511400F10339 /* haku.mov in Resources */,
 				954F2E1D17CB61CC00E0ED31 /* IMG_0024.MOV in Resources */,
+				9586513317CF4C3E000DD252 /* playVC_Back.png in Resources */,
+				9586513417CF4C3E000DD252 /* playVC_pause.png in Resources */,
+				9586513517CF4C3E000DD252 /* playVC_play.png in Resources */,
+				9586513617CF4C3E000DD252 /* playVC_pullButton.png in Resources */,
+				9586513717CF4C3E000DD252 /* playVC_seekBack.png in Resources */,
+				9586513817CF4C3E000DD252 /* playVC_seekForward.png in Resources */,
+				9586513A17CF4E32000DD252 /* video.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +367,7 @@
 				9586512117CEDFB4000DD252 /* MCTopAligningLabel.m in Sources */,
 				9586512517CEE2C9000DD252 /* UILabel+CalHeight.m in Sources */,
 				9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */,
+				9586512B17CF36DC000DD252 /* PopoverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

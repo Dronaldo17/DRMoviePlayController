@@ -27,15 +27,13 @@
 
 #define Base_Review_Tag 2000
 
-#define PopView_Time 3.0
-
 @interface ViewController ()
 {
     MPMoviePlayerController * _moviePlayer;  //播放器
     
-    int _fullTime;                                                //视频总秒数
-    
-    int  _playingTime;                                        //当前播放秒数
+     int _fullTime;                                                //视频总秒数
+     
+     int  _playingTime;                                        //当前播放秒数
     
     BOOL _isPlaying;                                         //当前播放中
     
@@ -47,8 +45,6 @@
     
     BOOL _leftViewPushed;                               //左边思考问题页面是否展现
     
-    BOOL _isPopUp;                                          //弹出提示框
-    
     float _volume;                                                //当前音量
     
     NSTimer * _timer;                                         //刷新界面的定时器
@@ -58,7 +54,7 @@
     UISlider * _volumeSlider;                             //控制音量的Slider
     
     UISlider * _playBackSlider;                          //播放进度的Slider
-    
+        
     UIView * _topNavView;                               //导航上边的view
     
     UIView * _bottomToolView;                         //功能条下边的view
@@ -68,7 +64,7 @@
     UIView * _askView;                                     //提问的view
     
     UIButton * _playButton;                                //播放按钮
-    
+
     UIButton * _muteButton;                               //静音Button\
     
     UIButton * _thinkButton;                                //思考Button\
@@ -76,8 +72,6 @@
     LeftQuestionView *  _questionView;             //问题View
     
     NSMutableArray * _addReviewArray;           //复习任务的Array
-    
-    PopoverView * _popView;                             //弹出的View
 }
 @end
 
@@ -131,7 +125,7 @@
     [_addReviewArray addObject:@"4"];
     [_addReviewArray addObject:@"8"];
     [_addReviewArray addObject:@"12"];
-    [_addReviewArray addObject:@"16"];
+     [_addReviewArray addObject:@"16"];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updatePlayTimes:) userInfo:nil repeats:YES];
     [_timer retain];
@@ -146,7 +140,7 @@
     
     //添加下边的BottomView
     [self addBottomToolView];
-    
+
     //添加暂停 播放  按钮
     [self addButtons];
     
@@ -179,18 +173,18 @@
 -(void)addReviewButton
 {
     for (int i = 0; i < _addReviewArray.count; i++) {
-        UIButton * button = [[UIButton alloc] init];
-        button.tag = Base_Review_Tag + i;
-        button.backgroundColor = [UIColor redColor];
+         UIButton * button = [[UIButton alloc] init];
+         button.tag = Base_Review_Tag + i;
+         button.backgroundColor = [UIColor redColor];
         CGFloat width =  _playBackSlider.frame.size.width;
         
         int time = [[_addReviewArray objectAtIndex:i] integerValue];
         
         NSLog(@"x == %f",width*time/20);
         
-        button.frame = CGRectMake(width*time/20, 10, 20, 20);
+        button.frame = CGRectMake(_playBackSlider.frame.origin.x+width*time/20, _bottomToolView.frame.origin.y +_playBackSlider.frame.origin.y + 15, 10, 10);
         [button addTarget:self action:@selector(reviewButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_playBackSlider addSubview:button];
+        [self.view addSubview:button];
     }
 }
 #pragma mark 添加
@@ -201,39 +195,24 @@
     NSLog(@"tag is %d",tag);
     
     NSLog(@"button.frame is %@",NSStringFromCGRect(button.frame));
-    CGPoint  point = CGPointMake(_playBackSlider.frame.origin.x +button.frame.origin.x+button.frame.size.width/2, button.frame.origin.y - button.frame.size.height/2 + _bottomToolView.frame.origin.y);
-    if (_popView) {
-        [_popView dismiss];
-    }
-    RELEASE_SAFELY(_popView);
-    _popView = [[PopoverView alloc] init];
-    [_popView showAtPoint:point inView:self.view withText:@"阿里巴巴-B2B国际技术部-全球搜索 在 杭州滨江 招聘[高级Java工程师/Java技术专家],在这里你有机会开发和运维上亿访问量的大型系统，有机会面对高并发、大用户量的挑战，有机会参与未来搜索的建设，有机会成为众多小二崇拜的技术明星!"];
-    _isPopUp = YES;
-    [self performSelector:@selector(dissmissPopView:) withObject:nil afterDelay:PopView_Time];
-//    [PopoverView showPopoverAtPoint:point inView:self.view withText:@"" delegate:nil];
-}
--(void)dissmissPopView:(id)sender
-{
-    if (_popView) {
-        [_popView dismiss];
-        _isPopUp = NO;
-    }
+    CGPoint  point = CGPointMake(button.frame.origin.x+button.frame.size.width/2, button.frame.origin.y - button.frame.size.height/2);
+    
+    [PopoverView showPopoverAtPoint:point inView:self.view withText:@"阿里巴巴-B2B国际技术部-全球搜索 在 杭州滨江 招聘[高级Java工程师/Java技术专家],在这里你有机会开发和运维上亿访问量的大型系统，有机会面对高并发、大用户量的挑战，有机会参与未来搜索的建设，有机会成为众多小二崇拜的技术明星!" delegate:nil];
 }
 #pragma mark 添加导航的NavView
 -(void)addNavView
 {
     if (_isFullScreen) {
-        _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - Top_Nav_Height, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+         _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - Top_Nav_Height, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
     }
     else{
-        _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
+         _topNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _moviePlayer.view.frame.size.width, Top_Nav_Height)];
     }
-    UIButton * popButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [popButton setImage:[UIImage imageNamed:@"playVC_Back"] forState:UIControlStateNormal];
-//    [popButton   setTitle:@"返回" forState:UIControlStateNormal];
-//    [popButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton * popButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [popButton   setTitle:@"返回" forState:UIControlStateNormal];
+    [popButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [popButton addTarget:self action:@selector(dissmissSelf:) forControlEvents:UIControlEventTouchUpInside];
-    popButton.frame = CGRectMake(30, 15, 35, 35);
+    popButton.frame = CGRectMake(30, 15, 50, 35);
     [_topNavView addSubview:popButton];
     
     UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 20, self.view.frame.size.height - 2 * 200, 30)];
@@ -245,10 +224,10 @@
     [_topNavView addSubview:titleLabel];
     [titleLabel release];
     
-    [_topNavView setBackgroundColor:[UIColor blackColor]];
+   [_topNavView setBackgroundColor:[UIColor blackColor]];
     [_topNavView setAlpha:TopViewAlpha];
     [[[UIApplication sharedApplication] keyWindow] addSubview:_topNavView];
-    [self.view addSubview:_topNavView];
+   [self.view addSubview:_topNavView];
 }
 #pragma mark 添加下边的BottomToolView
 -(void)addBottomToolView
@@ -266,11 +245,10 @@
 #pragma mark 添加播放器
 -(void)addPlayer
 {
-//       NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
-     NSString * path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
-        NSURL * url = [NSURL fileURLWithPath:path];
+//    NSString * path = [[NSBundle mainBundle] pathForResource:@"IMG_0024" ofType:@"MOV"];
+//    NSURL * url = [NSURL fileURLWithPath:path];
     
-//    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
+    NSURL *url = [NSURL URLWithString:@"http://www.gzerodesign.com/sharksclips/video.mp4"];
     CGFloat statusHeight = [[UIApplication sharedApplication] statusBarFrame].size.width;
     
 	_moviePlayer = [[MPMoviePlayerController alloc]
@@ -279,10 +257,10 @@
     
     UITapGestureRecognizer *playGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(playFullScreenOrNot:)];
     playGesture.delegate = self;
-    _moviePlayer.view.userInteractionEnabled = YES;
+   _moviePlayer.view.userInteractionEnabled = YES;
     [_moviePlayer.view addGestureRecognizer:playGesture];
     [playGesture release];
-    
+
     [_moviePlayer setFullscreen:YES animated:YES];
     [self.view addSubview:_moviePlayer.view];
     
@@ -293,24 +271,21 @@
 }
 #pragma mark 自定义的按钮
 -(void)addButtons
-{
-    _playButton  = [[UIButton alloc] initWithFrame:CGRectMake(460, 50,50, 50)];
-//    [_playButton setTitle:@"播放" forState:UIControlStateNormal];
-    [_playButton setImage:[UIImage imageNamed:@"playVC_play"] forState:UIControlStateNormal];
+{    
+    _playButton  = [[UIButton alloc] initWithFrame:CGRectMake(500, 60,100, 50)];
+     [_playButton setTitle:@"播放" forState:UIControlStateNormal];
     [_playButton addTarget:self action:@selector(playCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:_playButton];
     
-    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(320,50,70, 50)];
-//    [seekingBackButton setTitle:@"快退" forState:UIControlStateNormal];
-    [seekingBackButton setImage:[UIImage imageNamed:@"playVC_seekBack"] forState:UIControlStateNormal];
+    UIButton * seekingBackButton  = [[UIButton alloc] initWithFrame:CGRectMake(400,60,100, 50)];
+    [seekingBackButton setTitle:@"快退" forState:UIControlStateNormal];
     [seekingBackButton addTarget:self action:@selector(seekingBackCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:seekingBackButton];
     [seekingBackButton release];
+
     
-    
-    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(580, 50,70, 50)];
-//    [seekingForwardButton setTitle:@"快进" forState:UIControlStateNormal];
-     [seekingForwardButton setImage:[UIImage imageNamed:@"playVC_seekForward"] forState:UIControlStateNormal];
+    UIButton * seekingForwardButton  = [[UIButton alloc] initWithFrame:CGRectMake(600, 60,100, 50)];
+    [seekingForwardButton setTitle:@"快进" forState:UIControlStateNormal];
     [seekingForwardButton addTarget:self action:@selector(seekingForwardCilcked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:seekingForwardButton];
     [seekingForwardButton release];
@@ -318,11 +293,10 @@
 #pragma mark 添加显示时间的label
 -(void)addTimeLabel
 {
-    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 50, 300, 50)];
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 60, 100, 50)];
     _timeLabel.textColor = [UIColor whiteColor];
     _timeLabel.backgroundColor = [UIColor clearColor];
     _timeLabel.text = [NSString stringWithFormat:@"00:00|00:00"];
-    _timeLabel.font = [UIFont boldSystemFontOfSize:21.0];
     [_bottomToolView addSubview:_timeLabel];
 }
 #pragma mark 添加静音Button
@@ -360,7 +334,7 @@
     [askButton setTitle:@"提问" forState:UIControlStateNormal];
     [askButton addTarget:self action:@selector(askButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_askView addSubview:askButton];
-    
+
     UIButton * catAnswerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     catAnswerButton.frame = CGRectMake(15, 110, 55, 70);
     [catAnswerButton setTitle:@"查看答疑" forState:UIControlStateNormal];
@@ -376,19 +350,19 @@
 -(void)addQuestionView
 {
     if (_leftViewPushed) {
-        _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(0, 100, 300, 500)];
+             _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(0, 100, 300, 500)];
     }
     else{
-        _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(-300, 100, 300, 500)];
+            _questionView = [[LeftQuestionView alloc] initWithFrame:CGRectMake(-300, 100, 300, 500)];
     }
     [_questionView setBackgroundColor:[UIColor blackColor]];
     [_questionView setAlpha:TopViewAlpha];
     NSMutableArray * array = [NSMutableArray arrayWithCapacity:10];
     [array addObject:@"1"];
-    [array addObject:@"1"];
-    [array addObject:@"1"];
-    [array addObject:@"1"];
-    [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
+     [array addObject:@"1"];
     
     [_questionView updateQuestionInfo:array];
     [self.view addSubview:_questionView];
@@ -403,7 +377,7 @@
     [_thinkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_thinkButton addTarget:self action:@selector(thinkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_thinkButton];
-    
+
 }
 #pragma mark 左侧可以收起的按钮
 -(void)thinkButtonClicked:(id)sender
@@ -419,23 +393,23 @@
 }
 -(void)leftViewAppear
 {
-    
+
     CGRect thinkButtonStartFrame = CGRectMake(0,_questionView.center.y - 60/2, 60, 60);
     CGRect thinkButtonEndFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60);
     [DRTools appearViewAnimationWithView:_thinkButton duration:Appear_Time startFrame:thinkButtonStartFrame endFrame:thinkButtonEndFrame animationName:nil delegate:self];
-    
+
     CGRect questionViewStartFrame = CGRectMake(-300, 100, 300, 500);
     CGRect  questionViewEndFrame = CGRectMake(0, 100, 300, 500);
     [DRTools appearViewAnimationWithView:_questionView duration:Appear_Time startFrame:questionViewStartFrame endFrame:questionViewEndFrame animationName:nil delegate:self];
     
-    
-    //    CGRect askViewStartFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 100);
-    //    CGRect  askViewEndFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200);
-    //    [DRTools appearViewAnimationWithView:_askView duration:Appear_Time startFrame:askViewStartFrame endFrame:askViewEndFrame animationName:nil delegate:self];
-    //
-    //    UIButton * askButton =(UIButton* ) [_askView viewWithTag:Cat_Answer_Tag];
-    //    [askButton setHidden:NO];
-    
+   
+//    CGRect askViewStartFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 100);
+//    CGRect  askViewEndFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200);
+//    [DRTools appearViewAnimationWithView:_askView duration:Appear_Time startFrame:askViewStartFrame endFrame:askViewEndFrame animationName:nil delegate:self];
+//    
+//    UIButton * askButton =(UIButton* ) [_askView viewWithTag:Cat_Answer_Tag];
+//    [askButton setHidden:NO];
+
 }
 -(void)leftViewHidden
 {
@@ -447,11 +421,11 @@
     CGRect  questionViewEndFrame = CGRectMake(-300, 100, 300, 500);
     [DRTools appearViewAnimationWithView:_questionView duration:Appear_Time startFrame:questionViewStartFrame endFrame:questionViewEndFrame animationName:nil delegate:self];
     
-    //    CGRect askViewStartFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200);
-    //    CGRect  askViewEndFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 100);
-    //    [DRTools appearViewAnimationWithView:_askView duration:Appear_Time startFrame:askViewStartFrame endFrame:askViewEndFrame animationName:nil delegate:self];
-    //    UIButton * askButton =(UIButton* ) [_askView viewWithTag:Cat_Answer_Tag];
-    //    [askButton setHidden:YES];
+//    CGRect askViewStartFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200);
+//    CGRect  askViewEndFrame = CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 100);
+//    [DRTools appearViewAnimationWithView:_askView duration:Appear_Time startFrame:askViewStartFrame endFrame:askViewEndFrame animationName:nil delegate:self];
+//    UIButton * askButton =(UIButton* ) [_askView viewWithTag:Cat_Answer_Tag];
+//    [askButton setHidden:YES];
 }
 
 #pragma mark   右侧提问与查看答疑的
@@ -464,7 +438,7 @@
     NSLog(@"");
 }
 
-#pragma mark 上下Nav和Bottom的View的淡出淡出
+#pragma mark 上下Nav和Bottom的View的淡出淡出 
 -(void)dissmissSelf:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -483,7 +457,7 @@
 }
 -(void)bottomToolViewAppear
 {
-    CGRect startFrame = CGRectMake(0, _moviePlayer.view.frame.size.height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
+     CGRect startFrame = CGRectMake(0, _moviePlayer.view.frame.size.height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
     CGRect endFrame = CGRectMake(0, _moviePlayer.view.frame.size.height-Bottom_Tool_Height, _bottomToolView.frame.size.width, Bottom_Tool_Height);
     [DRTools appearViewAnimationWithView:_bottomToolView duration:Appear_Time startFrame:startFrame endFrame:endFrame animationName:nil delegate:self];
 }
@@ -526,7 +500,7 @@
 {
     UISlider * slider = (UISlider*)sender;
     NSLog(@"slider.value is %f",slider.value);
-    _moviePlayer.currentPlaybackTime = _fullTime * slider.value;
+     _moviePlayer.currentPlaybackTime = _fullTime * slider.value;
     [_moviePlayer prepareToPlay];
     [_moviePlayer play];
 }
@@ -539,14 +513,14 @@
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:_volume];
         [self updatePlayBackVolume:_volume];
     }
-    else{
+else{
         _isMute = YES;
         [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
         [self updatePlayBackVolume:0];
     }
     if(_volume <= 0){
-        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+         [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
     }
 }
 -(void)changeVolume:(id)sender
@@ -575,12 +549,10 @@
     NSLog(@"播放");
     if (_isPlaying) {
         [playButton setTitle:@"播放" forState:UIControlStateNormal];
-         [_playButton setImage:[UIImage imageNamed:@"playVC_play"] forState:UIControlStateNormal];
         [_moviePlayer pause];
     }
     else{
         [playButton setTitle:@"暂停" forState:UIControlStateNormal];
-         [_playButton setImage:[UIImage imageNamed:@"playVC_pause"] forState:UIControlStateNormal];
         [_moviePlayer play];
     }
 }
@@ -631,8 +603,8 @@
     
     //添加对声音大小的判断
     OSStatus s = AudioSessionAddPropertyListener(kAudioSessionProperty_CurrentHardwareOutputVolume,
-                                                 audioVolumeChangeListenerCallback,
-                                                 self);
+                                                     audioVolumeChangeListenerCallback,
+                                                     self);
     if (s == kAudioSessionNoError) {
         NSLog(@"监听音量键成功");
     }
@@ -644,12 +616,12 @@
 /* Remove the movie notification observers from the movie object. */
 -(void)removeMovieNotificationHandlers
 {
-    MPMoviePlayerController *player = _moviePlayer;
+     MPMoviePlayerController *player = _moviePlayer;
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:player];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:player];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMediaPlaybackIsPreparedToPlayDidChangeNotification object:player];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:player];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerTimedMetadataUpdatedNotification object:player];
+     [[NSNotificationCenter defaultCenter]removeObserver:self name:MPMoviePlayerTimedMetadataUpdatedNotification object:player];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMusicPlayerControllerVolumeDidChangeNotification object:_volumeSlider];
 }
 #pragma mark 按下外部音量键的回调
@@ -694,8 +666,8 @@ void audioVolumeChangeListenerCallback (void *inUserData,
             /* An error was encountered during playback. */
 		case MPMovieFinishReasonPlaybackError:
             NSLog(@"An error was encountered during playback");
-            //            [self performSelectorOnMainThread:@selector(displayError:) withObject:[[notification userInfo] objectForKey:@"error"]
-            //                                waitUntilDone:NO];
+//            [self performSelectorOnMainThread:@selector(displayError:) withObject:[[notification userInfo] objectForKey:@"error"]
+//                                waitUntilDone:NO];
             _isPause = YES;
             _isPlaying = NO;
 			break;
@@ -733,7 +705,6 @@ void audioVolumeChangeListenerCallback (void *inUserData,
         NSLog(@"MPMovieLoadStatePlayable  可以播放 视频时间为%f 秒",player.duration);
         _isPause = NO;
         _isPlaying = YES;
-        [_playButton setImage:[UIImage imageNamed:@"playVC_play"] forState:UIControlStateNormal];
 	}
 	
 	/* Enough data has been buffered for playback to continue uninterrupted. */
@@ -744,7 +715,6 @@ void audioVolumeChangeListenerCallback (void *inUserData,
         [MBAlertView dismissCurrentHUD];
         // Add an overlay view on top of the movie view
         NSLog(@"MPMovieLoadStatePlaythroughOK 可以播放 视频时间为%f 秒",player.duration);
-        [_playButton setImage:[UIImage imageNamed:@"playVC_pause"] forState:UIControlStateNormal];
 	}
 	
 	/* The buffering of data has stalled. */
@@ -753,7 +723,6 @@ void audioVolumeChangeListenerCallback (void *inUserData,
         _isPause = YES;
         _isPlaying = NO;
         [MBHUDView hudWithBody:@"加载中" type:MBAlertViewHUDTypeActivityIndicator hidesAfter:30 show:YES];
-        [_playButton setImage:[UIImage imageNamed:@"playVC_play"] forState:UIControlStateNormal];
 	}
 }
 #pragma mark 播放StateDidChange回调通知
@@ -779,7 +748,7 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 	/* Playback is currently paused. */
 	else if (player.playbackState == MPMoviePlaybackStatePaused)
 	{
-        NSLog(@"暂停按钮");
+       NSLog(@"暂停按钮");
         _isPause = YES;
         _isPlaying = NO;
 	}
@@ -794,7 +763,7 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 }
 -(void)mediaIsPreparedToPlayDidChange:(NSNotification*)notification
 {
-    //    [MBAlertView dismissCurrentHUD];
+//    [MBAlertView dismissCurrentHUD];
 }
 
 #pragma mark 刷新播放时间
@@ -808,7 +777,7 @@ void audioVolumeChangeListenerCallback (void *inUserData,
         playingTime = [NSNumber numberWithFloat:player.currentPlaybackTime];
         _fullTime = [fullTime intValue];
         _playingTime = [playingTime intValue];
-        
+         
         NSString * fullTimeString = [DRTools transSecondToTime:_fullTime];
         NSString * playTimeString = [DRTools transSecondToTime:_playingTime];
         _timeLabel.text = [NSString stringWithFormat:@"%@|%@",playTimeString,fullTimeString];
@@ -852,7 +821,7 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 {
     _playBackSlider.value =value;
 }
-#pragma mark - 触碰事件的回调
+ #pragma mark - 触碰事件的回调
 // this allows you to dispatch touches
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return YES;
