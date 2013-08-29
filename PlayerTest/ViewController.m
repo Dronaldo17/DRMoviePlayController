@@ -181,14 +181,23 @@
     for (int i = 0; i < _addReviewArray.count; i++) {
         UIButton * button = [[UIButton alloc] init];
         button.tag = Base_Review_Tag + i;
-        button.backgroundColor = [UIColor redColor];
+        button.backgroundColor = [UIColor clearColor];
+        
+        UIImage * image = [UIImage imageNamed:@"playVC_play_point1"];
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        [button setBackgroundImage:image forState:UIControlStateHighlighted];
+
+        UIImage * pointImage = [UIImage imageNamed:@"playVC_play_point"];
+        [button setImage:pointImage forState:UIControlStateHighlighted];
+        [button setImage:pointImage forState:UIControlStateNormal];
+        
         CGFloat width =  _playBackSlider.frame.size.width;
         
         int time = [[_addReviewArray objectAtIndex:i] integerValue];
         
         NSLog(@"x == %f",width*time/20);
         
-        button.frame = CGRectMake(width*time/20, 10, 20, 20);
+        button.frame = CGRectMake(width*time/20,11.5, 9, 19);
         [button addTarget:self action:@selector(reviewButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_playBackSlider addSubview:button];
     }
@@ -346,7 +355,7 @@
     [_volumeSlider setThumbImage:thumbImage forState:UIControlStateHighlighted];
     [_volumeSlider setThumbImage:thumbImage forState:UIControlStateNormal];
     
-    [_volumeSlider setMinimumTrackTintColor:RGBCOLOR(247, 98, 8)];
+    [_volumeSlider setMinimumTrackTintColor:RGBCOLOR(255, 80, 8)];
     [_volumeSlider setMaximumTrackTintColor:RGBCOLOR(87, 89, 91)];
     
     float volume = [MPMusicPlayerController applicationMusicPlayer].volume;
@@ -356,7 +365,7 @@
 #pragma mark 添加显示播放进度的Slider
 -(void)addPlayerBackSlider
 {
-    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, 800,40)];
+    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, _moviePlayer.view.frame.size.width - 120,40)];
     [_playBackSlider addTarget:self action:@selector(changePlayRate:) forControlEvents:UIControlEventValueChanged];
     
     UIImage *thumbImage = [UIImage imageNamed:@"playVC_play_slider"];
@@ -364,7 +373,7 @@
     [_playBackSlider setThumbImage:thumbImage forState:UIControlStateHighlighted];
     [_playBackSlider setThumbImage:thumbImage forState:UIControlStateNormal];
     
-    [_playBackSlider setMinimumTrackTintColor:RGBCOLOR(247, 98, 8)];
+    [_playBackSlider setMinimumTrackTintColor:RGBCOLOR(255, 80, 8)];
     [_playBackSlider setMaximumTrackTintColor:RGBCOLOR(87, 89, 91)];
     
     _playBackSlider.value = 0;
@@ -553,7 +562,7 @@
 }
 -(void)muteButtonClicked:(id)sender
 {
-    UIButton * muteButton = (UIButton*)sender;
+//    UIButton * muteButton = (UIButton*)sender;
     if (_isMute) {
         _isMute = NO;
 //        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
@@ -850,7 +859,8 @@ void audioVolumeChangeListenerCallback (void *inUserData,
     NSString * fullTimeString = [DRTools transSecondToTime:_fullTime];
     _timeLabel.text = [NSString stringWithFormat:@"00:00|%@",fullTimeString];
     _playBackSlider.value = 0;
-    [_playButton setTitle:@"播放" forState:UIControlStateNormal];
+//    [_playButton setTitle:@"播放" forState:UIControlStateNormal];
+   [_playButton setImage:[UIImage imageNamed:@"playVC_play"] forState:UIControlStateNormal];
 }
 
 #pragma mark 刷新音量控制

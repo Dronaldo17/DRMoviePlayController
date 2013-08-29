@@ -48,6 +48,7 @@
 		9586513D17CF9BC6000DD252 /* playVC_volume_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513B17CF9BC6000DD252 /* playVC_volume_button.png */; };
 		9586513E17CF9BC6000DD252 /* playVC_volume_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513C17CF9BC6000DD252 /* playVC_volume_slider.png */; };
 		9586514017CFA15F000DD252 /* playVC_play_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513F17CFA15E000DD252 /* playVC_play_slider.png */; };
+		9586514217CFA3E2000DD252 /* playVC_play_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586514117CFA3E2000DD252 /* playVC_play_point.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,7 @@
 		9586513B17CF9BC6000DD252 /* playVC_volume_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_volume_button.png; sourceTree = "<group>"; };
 		9586513C17CF9BC6000DD252 /* playVC_volume_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_volume_slider.png; sourceTree = "<group>"; };
 		9586513F17CFA15E000DD252 /* playVC_play_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_play_slider.png; sourceTree = "<group>"; };
+		9586514117CFA3E2000DD252 /* playVC_play_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_play_point.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 		9586512C17CF4C3E000DD252 /* 图片资源 */ = {
 			isa = PBXGroup;
 			children = (
+				9586514117CFA3E2000DD252 /* playVC_play_point.png */,
 				9586513F17CFA15E000DD252 /* playVC_play_slider.png */,
 				9586513B17CF9BC6000DD252 /* playVC_volume_button.png */,
 				9586513C17CF9BC6000DD252 /* playVC_volume_slider.png */,
@@ -352,6 +355,7 @@
 				9586513D17CF9BC6000DD252 /* playVC_volume_button.png in Resources */,
 				9586513E17CF9BC6000DD252 /* playVC_volume_slider.png in Resources */,
 				9586514017CFA15F000DD252 /* playVC_play_slider.png in Resources */,
+				9586514217CFA3E2000DD252 /* playVC_play_point.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
