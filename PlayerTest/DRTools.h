@@ -12,4 +12,5 @@
 @interface DRTools : NSObject
 +(NSString*) transSecondToTime:(int)seconds;
 +(void)appearViewAnimationWithView:(UIView*)view duration:(float)duration startFrame:(CGRect)startFrame endFrame:(CGRect)endFrame animationName:(NSString*)animationName  delegate:(id)delegate;
++(void)cornerRadiusView:(UIView*)view radius:(float)radius;
 @end

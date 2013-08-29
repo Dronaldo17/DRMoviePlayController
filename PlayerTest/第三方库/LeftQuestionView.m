@@ -7,6 +7,7 @@
 //
 
 #import "LeftQuestionView.h"
+#import "DRTools.h"
 
 @implementation LeftQuestionView
 
@@ -28,6 +29,8 @@
         _questionScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, _titleLabel.frame.size.height + 5, frame.size.width, frame.size.height-60)];
         [self addSubview:_questionScrollview];
         _tmpHeight = 0;
+         [DRTools cornerRadiusView:self
+                            radius:0.7];
     }
     return self;
 }

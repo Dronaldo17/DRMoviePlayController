@@ -328,8 +328,9 @@
 #pragma mark 添加静音Button
 -(void)addMuteButton
 {
-    _muteButton = [[UIButton alloc] initWithFrame:CGRectMake(800, 60, 60, 60)];
-    [_muteButton setTitle:@"静音" forState:UIControlStateNormal];
+    _muteButton = [[UIButton alloc] initWithFrame:CGRectMake(800, 60, 25, 25)];
+//    [_muteButton setTitle:@"静音" forState:UIControlStateNormal];
+    [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
     [_muteButton addTarget:self action:@selector(muteButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomToolView addSubview:_muteButton];
 }
@@ -337,8 +338,17 @@
 #pragma mark 添加显示音量的Slider
 -(void)addVolumeSlider
 {
-    _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(900, 60, 100,50)];
+    _volumeSlider = [[UISlider alloc] initWithFrame:CGRectMake(840, 48, 140,50)];
     [_volumeSlider addTarget:self action:@selector(changeVolume:) forControlEvents:UIControlEventValueChanged];
+    
+    UIImage *thumbImage = [UIImage imageNamed:@"playVC_volume_slider"];
+    
+    [_volumeSlider setThumbImage:thumbImage forState:UIControlStateHighlighted];
+    [_volumeSlider setThumbImage:thumbImage forState:UIControlStateNormal];
+    
+    [_volumeSlider setMinimumTrackTintColor:RGBCOLOR(247, 98, 8)];
+    [_volumeSlider setMaximumTrackTintColor:RGBCOLOR(87, 89, 91)];
+    
     float volume = [MPMusicPlayerController applicationMusicPlayer].volume;
     _volumeSlider.value = volume;
     [_bottomToolView   addSubview:_volumeSlider];
@@ -346,8 +356,17 @@
 #pragma mark 添加显示播放进度的Slider
 -(void)addPlayerBackSlider
 {
-    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, 700,40)];
+    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, 800,40)];
     [_playBackSlider addTarget:self action:@selector(changePlayRate:) forControlEvents:UIControlEventValueChanged];
+    
+    UIImage *thumbImage = [UIImage imageNamed:@"playVC_play_slider"];
+    
+    [_playBackSlider setThumbImage:thumbImage forState:UIControlStateHighlighted];
+    [_playBackSlider setThumbImage:thumbImage forState:UIControlStateNormal];
+    
+    [_playBackSlider setMinimumTrackTintColor:RGBCOLOR(247, 98, 8)];
+    [_playBackSlider setMaximumTrackTintColor:RGBCOLOR(87, 89, 91)];
+    
     _playBackSlider.value = 0;
     [_bottomToolView   addSubview:_playBackSlider];
 }
@@ -383,6 +402,7 @@
     }
     [_questionView setBackgroundColor:[UIColor blackColor]];
     [_questionView setAlpha:TopViewAlpha];
+   
     NSMutableArray * array = [NSMutableArray arrayWithCapacity:10];
     [array addObject:@"1"];
     [array addObject:@"1"];
@@ -397,9 +417,10 @@
 #pragma mark 添加左侧可以点击的Button
 -(void)addThinkButton
 {
-    _thinkButton = [[UIButton alloc] initWithFrame:CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60)];
-    [_thinkButton setTitle:@"拉起来" forState:UIControlStateNormal];
-    [_thinkButton setBackgroundColor:[UIColor blackColor]];
+    _thinkButton = [[UIButton alloc] initWithFrame:CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 32, 57)];
+//    [_thinkButton setTitle:@"拉起来" forState:UIControlStateNormal];
+//    [_thinkButton setBackgroundColor:[UIColor blackColor]];
+    [_thinkButton setImage:[UIImage imageNamed:@"playVC_pullButton"] forState:UIControlStateNormal];
     [_thinkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_thinkButton addTarget:self action:@selector(thinkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_thinkButton];
@@ -420,8 +441,8 @@
 -(void)leftViewAppear
 {
     
-    CGRect thinkButtonStartFrame = CGRectMake(0,_questionView.center.y - 60/2, 60, 60);
-    CGRect thinkButtonEndFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60);
+    CGRect thinkButtonStartFrame = CGRectMake(0,_questionView.center.y - 60/2, _thinkButton.frame.size.width, _thinkButton.frame.size.height);
+    CGRect thinkButtonEndFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, _thinkButton.frame.size.width, _thinkButton.frame.size.height);
     [DRTools appearViewAnimationWithView:_thinkButton duration:Appear_Time startFrame:thinkButtonStartFrame endFrame:thinkButtonEndFrame animationName:nil delegate:self];
     
     CGRect questionViewStartFrame = CGRectMake(-300, 100, 300, 500);
@@ -439,8 +460,8 @@
 }
 -(void)leftViewHidden
 {
-    CGRect thinkButtonStartFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, 60, 60);
-    CGRect thinkButtonEndFrame = CGRectMake(0,_questionView.center.y - 60/2, 60, 60);
+    CGRect thinkButtonStartFrame = CGRectMake(_questionView.frame.size.width,_questionView.center.y - 60/2, _thinkButton.frame.size.width, _thinkButton.frame.size.height);
+    CGRect thinkButtonEndFrame = CGRectMake(0,_questionView.center.y - 60/2, _thinkButton.frame.size.width, _thinkButton.frame.size.height);
     [DRTools appearViewAnimationWithView:_thinkButton duration:Appear_Time startFrame:thinkButtonStartFrame endFrame:thinkButtonEndFrame animationName:nil delegate:self];
     
     CGRect questionViewStartFrame = CGRectMake(0, 100, 300, 500);
@@ -535,18 +556,21 @@
     UIButton * muteButton = (UIButton*)sender;
     if (_isMute) {
         _isMute = NO;
-        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+//        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+        [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:_volume];
         [self updatePlayBackVolume:_volume];
     }
     else{
         _isMute = YES;
-        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+//        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+        [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
         [self updatePlayBackVolume:0];
     }
     if(_volume <= 0){
-        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+//        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+        [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
     }
 }
 -(void)changeVolume:(id)sender
@@ -838,13 +862,15 @@ void audioVolumeChangeListenerCallback (void *inUserData,
 {
     if (mute) {
         _isMute = NO;
-        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+//        [muteButton setTitle:@"已静音" forState:UIControlStateNormal];
+        [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
         [self updatePlayBackVolume:0];
     }
     else{
         _isMute = YES;
-        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+//        [muteButton setTitle:@"静音" forState:UIControlStateNormal];
+        [_muteButton setImage:[UIImage imageNamed:@"playVC_volume_button"] forState:UIControlStateNormal];
         [self updatePlayBackVolume:_volume];
     }
 }

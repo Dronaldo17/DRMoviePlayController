@@ -5,7 +5,7 @@
 //  Created by doujingxuan on 13-8-27.
 //  Copyright (c) 2013年 doujingxuan. All rights reserved.
 //
-
+#import <QuartzCore/QuartzCore.h>
 #import "DRTools.h"
 
 @implementation DRTools
@@ -74,5 +74,11 @@
     
     // 设置动画结束的处理事件
     [UIView commitAnimations];
+}
++(void)cornerRadiusView:(UIView*)view radius:(float)radius
+{
+    view.layer.cornerRadius = radius;//设置那个圆角的有多圆
+    view.layer.borderColor = [[UIColor clearColor] CGColor];//设置边框的颜色
+    view.layer.masksToBounds = YES;//设为NO去试试
 }
 @end
