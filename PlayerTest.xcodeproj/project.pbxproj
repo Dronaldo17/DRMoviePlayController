@@ -49,6 +49,12 @@
 		9586513E17CF9BC6000DD252 /* playVC_volume_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513C17CF9BC6000DD252 /* playVC_volume_slider.png */; };
 		9586514017CFA15F000DD252 /* playVC_play_slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586513F17CFA15E000DD252 /* playVC_play_slider.png */; };
 		9586514217CFA3E2000DD252 /* playVC_play_point.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586514117CFA3E2000DD252 /* playVC_play_point.png */; };
+		9586514617D0355F000DD252 /* AskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586514517D0355F000DD252 /* AskViewController.m */; };
+		9586514C17D03763000DD252 /* AskViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586514B17D03763000DD252 /* AskViewVC.xib */; };
+		9586514F17D05D64000DD252 /* ask_nav_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586514D17D05D64000DD252 /* ask_nav_banner.png */; };
+		9586515017D05D64000DD252 /* ask_pop_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586514E17D05D64000DD252 /* ask_pop_button.png */; };
+		9586515317D0621F000DD252 /* playVC_ask_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586515117D0621F000DD252 /* playVC_ask_button.png */; };
+		9586515417D0621F000DD252 /* playVC_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586515217D0621F000DD252 /* playVC_line.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +122,13 @@
 		9586513C17CF9BC6000DD252 /* playVC_volume_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_volume_slider.png; sourceTree = "<group>"; };
 		9586513F17CFA15E000DD252 /* playVC_play_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_play_slider.png; sourceTree = "<group>"; };
 		9586514117CFA3E2000DD252 /* playVC_play_point.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_play_point.png; sourceTree = "<group>"; };
+		9586514417D0355F000DD252 /* AskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskViewController.h; sourceTree = "<group>"; };
+		9586514517D0355F000DD252 /* AskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskViewController.m; sourceTree = "<group>"; };
+		9586514B17D03763000DD252 /* AskViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskViewVC.xib; sourceTree = "<group>"; };
+		9586514D17D05D64000DD252 /* ask_nav_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_nav_banner.png; sourceTree = "<group>"; };
+		9586514E17D05D64000DD252 /* ask_pop_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_pop_button.png; sourceTree = "<group>"; };
+		9586515117D0621F000DD252 /* playVC_ask_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_ask_button.png; sourceTree = "<group>"; };
+		9586515217D0621F000DD252 /* playVC_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_line.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +151,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				9586514317D0354A000DD252 /* 提问 */,
 				9586512C17CF4C3E000DD252 /* 图片资源 */,
 				958650B417CC39C8000DD252 /* 第三方库 */,
 				9535689817CAE98C00F10339 /* PlayerTest */,
@@ -272,6 +286,10 @@
 		9586512C17CF4C3E000DD252 /* 图片资源 */ = {
 			isa = PBXGroup;
 			children = (
+				9586515117D0621F000DD252 /* playVC_ask_button.png */,
+				9586515217D0621F000DD252 /* playVC_line.png */,
+				9586514D17D05D64000DD252 /* ask_nav_banner.png */,
+				9586514E17D05D64000DD252 /* ask_pop_button.png */,
 				9586514117CFA3E2000DD252 /* playVC_play_point.png */,
 				9586513F17CFA15E000DD252 /* playVC_play_slider.png */,
 				9586513B17CF9BC6000DD252 /* playVC_volume_button.png */,
@@ -285,6 +303,17 @@
 			);
 			name = "图片资源";
 			path = "PlayerTest/图片资源";
+			sourceTree = "<group>";
+		};
+		9586514317D0354A000DD252 /* 提问 */ = {
+			isa = PBXGroup;
+			children = (
+				9586514B17D03763000DD252 /* AskViewVC.xib */,
+				9586514417D0355F000DD252 /* AskViewController.h */,
+				9586514517D0355F000DD252 /* AskViewController.m */,
+			);
+			name = "提问";
+			path = "PlayerTest/提问";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +385,11 @@
 				9586513E17CF9BC6000DD252 /* playVC_volume_slider.png in Resources */,
 				9586514017CFA15F000DD252 /* playVC_play_slider.png in Resources */,
 				9586514217CFA3E2000DD252 /* playVC_play_point.png in Resources */,
+				9586514C17D03763000DD252 /* AskViewVC.xib in Resources */,
+				9586514F17D05D64000DD252 /* ask_nav_banner.png in Resources */,
+				9586515017D05D64000DD252 /* ask_pop_button.png in Resources */,
+				9586515317D0621F000DD252 /* playVC_ask_button.png in Resources */,
+				9586515417D0621F000DD252 /* playVC_line.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +418,7 @@
 				9586512517CEE2C9000DD252 /* UILabel+CalHeight.m in Sources */,
 				9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */,
 				9586512B17CF36DC000DD252 /* PopoverView.m in Sources */,
+				9586514617D0355F000DD252 /* AskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

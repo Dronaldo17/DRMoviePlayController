@@ -14,6 +14,7 @@
 #import "QuestionView.h"
 #import "LeftQuestionView.h"
 #import "PopoverView.h"
+#import "AskViewController.h"
 
 #define Top_Nav_Height  70
 
@@ -365,7 +366,7 @@
 #pragma mark 添加显示播放进度的Slider
 -(void)addPlayerBackSlider
 {
-    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, _moviePlayer.view.frame.size.width - 120,40)];
+    _playBackSlider = [[UISlider alloc] initWithFrame:CGRectMake(100, 10, _moviePlayer.view.frame.size.width - 148,40)];
     [_playBackSlider addTarget:self action:@selector(changePlayRate:) forControlEvents:UIControlEventValueChanged];
     
     UIImage *thumbImage = [UIImage imageNamed:@"playVC_play_slider"];
@@ -383,19 +384,64 @@
 -(void)addAskView
 {
     _askView = [[UIView alloc] initWithFrame:CGRectMake(_moviePlayer.view.frame.size.width - 100, _moviePlayer.view.center.y-150, 100, 200)];
-    UIButton * askButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    askButton.frame = CGRectMake(15, 10, 55, 70);
-    [askButton setTitle:@"提问" forState:UIControlStateNormal];
-    [askButton addTarget:self action:@selector(askButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_askView addSubview:askButton];
+    UIView * askView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, _askView.frame.size.width, 90)];
     
-    UIButton * catAnswerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    catAnswerButton.frame = CGRectMake(15, 110, 55, 70);
-    [catAnswerButton setTitle:@"查看答疑" forState:UIControlStateNormal];
-    catAnswerButton.tag = Cat_Answer_Tag;
-    [catAnswerButton addTarget:self action:@selector(catAnswerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_askView addSubview:catAnswerButton];
+    UITapGestureRecognizer *askGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(askButtonClicked:)];
+    askGesture.delegate = self;
+    askView.userInteractionEnabled = YES;
+    [askView addGestureRecognizer:askGesture];
+    [askGesture release];
+
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(35, 5, 30, 35)];
+    imageView.image = [UIImage imageNamed:@"playVC_ask_button"];
+    [askView addSubview:imageView];
+    [imageView release];
     
+    UILabel * askLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 45, 70, 25)];
+    askLabel.text = @"提问";
+    askLabel.textColor = [UIColor whiteColor];
+    askLabel.textAlignment = NSTextAlignmentCenter;
+    [askLabel setBackgroundColor:[UIColor clearColor]];
+    [askLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [askView addSubview:askLabel];
+    [askLabel release];
+    
+    [_askView addSubview:askView];
+    [askView release] ;
+    
+    
+    UIImageView * lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 95, _askView.frame.size.width - 2*10, 3)];
+    lineImageView.image = [UIImage imageNamed:@"playVC_line"];
+    [_askView addSubview:lineImageView];
+    [lineImageView release];
+    
+    
+    UIView * catAnswerView = [[UIView alloc] initWithFrame:CGRectMake(15, 110, 70, 90)];
+    [_askView addSubview:catAnswerView];
+    
+    UILabel * catLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 70, 40)];
+    catLabel.text = @"查看";
+    catLabel.textColor = [UIColor whiteColor];
+    catLabel.textAlignment = NSTextAlignmentCenter;
+    [catLabel setBackgroundColor:[UIColor clearColor]];
+    [catLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [catAnswerView addSubview:catLabel];
+    
+    UILabel * answerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,30, 70, 40)];
+    answerLabel.text = @"答疑";
+    answerLabel.textColor = [UIColor whiteColor];
+    answerLabel.textAlignment = NSTextAlignmentCenter;
+    [answerLabel setBackgroundColor:[UIColor clearColor]];
+    [answerLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [catAnswerView addSubview:answerLabel];
+
+    
+    UITapGestureRecognizer *catGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(catAnswerButtonClicked:)];
+    catGesture.delegate = self;
+    catAnswerView.userInteractionEnabled = YES;
+    [catAnswerView addGestureRecognizer:catGesture];
+    [catGesture release];
+
     [_askView setBackgroundColor:[UIColor blackColor]];
     [_askView setAlpha:TopViewAlpha];
     [self.view addSubview:_askView];
@@ -430,8 +476,10 @@
 //    [_thinkButton setTitle:@"拉起来" forState:UIControlStateNormal];
 //    [_thinkButton setBackgroundColor:[UIColor blackColor]];
     [_thinkButton setImage:[UIImage imageNamed:@"playVC_pullButton"] forState:UIControlStateNormal];
+     [_thinkButton setImage:[UIImage imageNamed:@"playVC_pullButton"] forState:UIControlStateHighlighted];
     [_thinkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_thinkButton addTarget:self action:@selector(thinkButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_thinkButton addTarget:self action:@selector(thinkButtonClicked:) forControlEvents:UIControlEventTouchUpOutside];
     [self.view addSubview:_thinkButton];
     
 }
@@ -488,6 +536,9 @@
 -(void)askButtonClicked:(id)sender
 {
     NSLog(@"提问按钮按下");
+    AskViewController * asv = [[AskViewController alloc] init];
+   [self presentViewController:asv animated:YES completion:nil];
+    [asv release];
 }
 -(void)catAnswerButtonClicked:(id)sender
 {
