@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "POVoiceHUD.h"
 
-@interface AskViewController : UIViewController
+@interface AskViewController : UIViewController<POVoiceHUDDelegate>
 
+@property (nonatomic, retain) POVoiceHUD *voiceHud;
 @end

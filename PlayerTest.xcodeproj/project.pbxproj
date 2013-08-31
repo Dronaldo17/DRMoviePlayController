@@ -55,6 +55,22 @@
 		9586515017D05D64000DD252 /* ask_pop_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586514E17D05D64000DD252 /* ask_pop_button.png */; };
 		9586515317D0621F000DD252 /* playVC_ask_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586515117D0621F000DD252 /* playVC_ask_button.png */; };
 		9586515417D0621F000DD252 /* playVC_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586515217D0621F000DD252 /* playVC_line.png */; };
+		9586515717D06E9D000DD252 /* SSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586515617D06E9D000DD252 /* SSTextView.m */; };
+		9586515917D074DB000DD252 /* ask_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586515817D074DB000DD252 /* ask_line.png */; };
+		9586515F17D07C10000DD252 /* ButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586515C17D07C10000DD252 /* ButtonsView.m */; };
+		9586516017D07C10000DD252 /* PhotoWallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586515E17D07C10000DD252 /* PhotoWallView.m */; };
+		9586516317D07D97000DD252 /* AskUploadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586516217D07D97000DD252 /* AskUploadView.m */; };
+		9586516717D07FD1000DD252 /* ask_add_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516417D07FD1000DD252 /* ask_add_Image.png */; };
+		9586516817D07FD1000DD252 /* ask_addImage_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516517D07FD1000DD252 /* ask_addImage_bg.png */; };
+		9586516917D07FD1000DD252 /* ask_del_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516617D07FD1000DD252 /* ask_del_button.png */; };
+		9586516C17D08A6D000DD252 /* test9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516A17D08A6D000DD252 /* test9@2x.png */; };
+		9586516D17D08A6D000DD252 /* test10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516B17D08A6D000DD252 /* test10@2x.png */; };
+		9586517317D08DF8000DD252 /* microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586516F17D08DF8000DD252 /* microphone.png */; };
+		9586517417D08DF8000DD252 /* POVoiceHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586517117D08DF8000DD252 /* POVoiceHUD.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		9586517617D091A4000DD252 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9586517517D091A4000DD252 /* AVFoundation.framework */; };
+		9586517D17D099F3000DD252 /* ask_record_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586517B17D099F2000DD252 /* ask_record_button.png */; };
+		9586517E17D099F3000DD252 /* ask_record.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586517C17D099F3000DD252 /* ask_record.png */; };
+		95A46ABE17D0FE4F0068948B /* ask_record_delbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +145,28 @@
 		9586514E17D05D64000DD252 /* ask_pop_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_pop_button.png; sourceTree = "<group>"; };
 		9586515117D0621F000DD252 /* playVC_ask_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_ask_button.png; sourceTree = "<group>"; };
 		9586515217D0621F000DD252 /* playVC_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playVC_line.png; sourceTree = "<group>"; };
+		9586515517D06E9D000DD252 /* SSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextView.h; sourceTree = "<group>"; };
+		9586515617D06E9D000DD252 /* SSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextView.m; sourceTree = "<group>"; };
+		9586515817D074DB000DD252 /* ask_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_line.png; sourceTree = "<group>"; };
+		9586515B17D07C10000DD252 /* ButtonsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonsView.h; sourceTree = "<group>"; };
+		9586515C17D07C10000DD252 /* ButtonsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonsView.m; sourceTree = "<group>"; };
+		9586515D17D07C10000DD252 /* PhotoWallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWallView.h; sourceTree = "<group>"; };
+		9586515E17D07C10000DD252 /* PhotoWallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWallView.m; sourceTree = "<group>"; };
+		9586516117D07D97000DD252 /* AskUploadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskUploadView.h; sourceTree = "<group>"; };
+		9586516217D07D97000DD252 /* AskUploadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskUploadView.m; sourceTree = "<group>"; };
+		9586516417D07FD1000DD252 /* ask_add_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_add_Image.png; sourceTree = "<group>"; };
+		9586516517D07FD1000DD252 /* ask_addImage_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_addImage_bg.png; sourceTree = "<group>"; };
+		9586516617D07FD1000DD252 /* ask_del_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_del_button.png; sourceTree = "<group>"; };
+		9586516A17D08A6D000DD252 /* test9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test9@2x.png"; sourceTree = "<group>"; };
+		9586516B17D08A6D000DD252 /* test10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test10@2x.png"; sourceTree = "<group>"; };
+		9586516F17D08DF8000DD252 /* microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microphone.png; sourceTree = "<group>"; };
+		9586517017D08DF8000DD252 /* POVoiceHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POVoiceHUD.h; sourceTree = "<group>"; };
+		9586517117D08DF8000DD252 /* POVoiceHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POVoiceHUD.m; sourceTree = "<group>"; };
+		9586517217D08DF8000DD252 /* POVoiceHUDDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POVoiceHUDDelegate.h; sourceTree = "<group>"; };
+		9586517517D091A4000DD252 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9586517B17D099F2000DD252 /* ask_record_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record_button.png; sourceTree = "<group>"; };
+		9586517C17D099F3000DD252 /* ask_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record.png; sourceTree = "<group>"; };
+		95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record_delbutton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9586517617D091A4000DD252 /* AVFoundation.framework in Frameworks */,
 				958650D917CC94FC000DD252 /* AudioToolbox.framework in Frameworks */,
 				958650D717CC3B1F000DD252 /* QuartzCore.framework in Frameworks */,
 				953568BA17CAFECD00F10339 /* MediaPlayer.framework in Frameworks */,
@@ -151,6 +190,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				9586516E17D08DF8000DD252 /* 录音 */,
 				9586514317D0354A000DD252 /* 提问 */,
 				9586512C17CF4C3E000DD252 /* 图片资源 */,
 				958650B417CC39C8000DD252 /* 第三方库 */,
@@ -171,6 +211,7 @@
 		9535689117CAE98C00F10339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9586517517D091A4000DD252 /* AVFoundation.framework */,
 				958650D817CC94FC000DD252 /* AudioToolbox.framework */,
 				958650D617CC3B1F000DD252 /* QuartzCore.framework */,
 				953568B917CAFECD00F10339 /* MediaPlayer.framework */,
@@ -218,6 +259,8 @@
 		958650B417CC39C8000DD252 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				9586515517D06E9D000DD252 /* SSTextView.h */,
+				9586515617D06E9D000DD252 /* SSTextView.m */,
 				9586512917CF36DB000DD252 /* PopoverView.h */,
 				9586512A17CF36DC000DD252 /* PopoverView.m */,
 				9586512317CEE2C9000DD252 /* UILabel+CalHeight.h */,
@@ -286,6 +329,15 @@
 		9586512C17CF4C3E000DD252 /* 图片资源 */ = {
 			isa = PBXGroup;
 			children = (
+				95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */,
+				9586517B17D099F2000DD252 /* ask_record_button.png */,
+				9586517C17D099F3000DD252 /* ask_record.png */,
+				9586516A17D08A6D000DD252 /* test9@2x.png */,
+				9586516B17D08A6D000DD252 /* test10@2x.png */,
+				9586516417D07FD1000DD252 /* ask_add_Image.png */,
+				9586516517D07FD1000DD252 /* ask_addImage_bg.png */,
+				9586516617D07FD1000DD252 /* ask_del_button.png */,
+				9586515817D074DB000DD252 /* ask_line.png */,
 				9586515117D0621F000DD252 /* playVC_ask_button.png */,
 				9586515217D0621F000DD252 /* playVC_line.png */,
 				9586514D17D05D64000DD252 /* ask_nav_banner.png */,
@@ -308,12 +360,38 @@
 		9586514317D0354A000DD252 /* 提问 */ = {
 			isa = PBXGroup;
 			children = (
+				9586515A17D07C03000DD252 /* 照片墙 */,
 				9586514B17D03763000DD252 /* AskViewVC.xib */,
 				9586514417D0355F000DD252 /* AskViewController.h */,
 				9586514517D0355F000DD252 /* AskViewController.m */,
 			);
 			name = "提问";
 			path = "PlayerTest/提问";
+			sourceTree = "<group>";
+		};
+		9586515A17D07C03000DD252 /* 照片墙 */ = {
+			isa = PBXGroup;
+			children = (
+				9586515B17D07C10000DD252 /* ButtonsView.h */,
+				9586515C17D07C10000DD252 /* ButtonsView.m */,
+				9586515D17D07C10000DD252 /* PhotoWallView.h */,
+				9586515E17D07C10000DD252 /* PhotoWallView.m */,
+				9586516117D07D97000DD252 /* AskUploadView.h */,
+				9586516217D07D97000DD252 /* AskUploadView.m */,
+			);
+			path = "照片墙";
+			sourceTree = "<group>";
+		};
+		9586516E17D08DF8000DD252 /* 录音 */ = {
+			isa = PBXGroup;
+			children = (
+				9586516F17D08DF8000DD252 /* microphone.png */,
+				9586517017D08DF8000DD252 /* POVoiceHUD.h */,
+				9586517117D08DF8000DD252 /* POVoiceHUD.m */,
+				9586517217D08DF8000DD252 /* POVoiceHUDDelegate.h */,
+			);
+			name = "录音";
+			path = "PlayerTest/录音";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +468,16 @@
 				9586515017D05D64000DD252 /* ask_pop_button.png in Resources */,
 				9586515317D0621F000DD252 /* playVC_ask_button.png in Resources */,
 				9586515417D0621F000DD252 /* playVC_line.png in Resources */,
+				9586515917D074DB000DD252 /* ask_line.png in Resources */,
+				9586516717D07FD1000DD252 /* ask_add_Image.png in Resources */,
+				9586516817D07FD1000DD252 /* ask_addImage_bg.png in Resources */,
+				9586516917D07FD1000DD252 /* ask_del_button.png in Resources */,
+				9586516C17D08A6D000DD252 /* test9@2x.png in Resources */,
+				9586516D17D08A6D000DD252 /* test10@2x.png in Resources */,
+				9586517317D08DF8000DD252 /* microphone.png in Resources */,
+				9586517D17D099F3000DD252 /* ask_record_button.png in Resources */,
+				9586517E17D099F3000DD252 /* ask_record.png in Resources */,
+				95A46ABE17D0FE4F0068948B /* ask_record_delbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +507,11 @@
 				9586512817CEED28000DD252 /* LeftQuestionView.m in Sources */,
 				9586512B17CF36DC000DD252 /* PopoverView.m in Sources */,
 				9586514617D0355F000DD252 /* AskViewController.m in Sources */,
+				9586515717D06E9D000DD252 /* SSTextView.m in Sources */,
+				9586515F17D07C10000DD252 /* ButtonsView.m in Sources */,
+				9586516017D07C10000DD252 /* PhotoWallView.m in Sources */,
+				9586516317D07D97000DD252 /* AskUploadView.m in Sources */,
+				9586517417D08DF8000DD252 /* POVoiceHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
