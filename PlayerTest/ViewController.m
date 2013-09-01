@@ -15,6 +15,8 @@
 #import "LeftQuestionView.h"
 #import "PopoverView.h"
 #import "AskViewController.h"
+#import "CatAnswerVC.h"
+#import "AnswerQuestionVC.h"
 
 #define Top_Nav_Height  70
 
@@ -542,7 +544,14 @@
 }
 -(void)catAnswerButtonClicked:(id)sender
 {
-    NSLog(@"");
+    NSLog(@"查看答疑");
+//    CatAnswerVC * cvc = [[CatAnswerVC alloc] init];
+//    [self presentViewController:cvc animated:YES completion:nil];
+//    [cvc release];
+    
+    AnswerQuestionVC * aqc = [[AnswerQuestionVC alloc] init];
+    [self presentViewController:aqc animated:YES completion:nil];
+    [aqc release];
 }
 
 #pragma mark 上下Nav和Bottom的View的淡出淡出

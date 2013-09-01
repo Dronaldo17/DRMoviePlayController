@@ -1,22 +1,21 @@
 //
-//  CatAnswerVC.m
+//  AnswerQuestionVC.m
 //  PlayerTest
 //
 //  Created by doujingxuan on 13-9-1.
 //  Copyright (c) 2013年 doujingxuan. All rights reserved.
 //
 
-#import "CatAnswerVC.h"
+#import "AnswerQuestionVC.h"
 
-@interface CatAnswerVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface AnswerQuestionVC ()
 {
-    UITableView * _tableView;
-
+    UIView * _questionView;
 }
 
 @end
 
-@implementation CatAnswerVC
+@implementation AnswerQuestionVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +31,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    //添加导航
+    //添加导航view
     [self addNavView];
 }
 
@@ -45,21 +44,21 @@
 #pragma mark 添加导航
 -(void)addNavView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(150, 81, self.view.frame.size.height - 2*150, 678)];
-    [_tableView setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:_tableView];
+//    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(150, 81, self.view.frame.size.height - 2*150, 678)];
+//    [_tableView setBackgroundColor:[UIColor whiteColor]];
+//    [self.view addSubview:_tableView];
     
     
     //添加上边导航View
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.height, 60)];
-
+    
     view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:view];
     
     UIImageView * topLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 77, view.frame.size.width, 5)];
     topLineView.image = [UIImage imageNamed:@"ask_line"];
     [self.view addSubview:topLineView];
-
+    
     //添加Nav背景图片
     UIImageView * bannerImageView = [[UIImageView alloc] initWithFrame:view.bounds];
     bannerImageView.image = [UIImage imageNamed:@"ask_nav_banner"];

@@ -84,6 +84,10 @@
 		95A46ADC17D368350068948B /* ask_spearate_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ADB17D368340068948B /* ask_spearate_line.png */; };
 		95A46ADE17D36CEA0068948B /* ask_middle_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ADD17D36CEA0068948B /* ask_middle_line.png */; };
 		95A46AE217D36DFC0068948B /* CatAnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AE117D36DFC0068948B /* CatAnswerVC.m */; };
+		95A46AE617D378260068948B /* AnswerQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AE517D378260068948B /* AnswerQuestionVC.m */; };
+		95A46AE917D378470068948B /* AnswerQAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AE817D378470068948B /* AnswerQAModel.m */; };
+		95A46AEC17D380CC0068948B /* CatAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AEB17D380CC0068948B /* CatAnswerCell.m */; };
+		95A46AEF17D381690068948B /* CatAnswerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AEE17D381690068948B /* CatAnswerModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -200,6 +204,14 @@
 		95A46ADD17D36CEA0068948B /* ask_middle_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_middle_line.png; sourceTree = "<group>"; };
 		95A46AE017D36DFC0068948B /* CatAnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatAnswerVC.h; sourceTree = "<group>"; };
 		95A46AE117D36DFC0068948B /* CatAnswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatAnswerVC.m; sourceTree = "<group>"; };
+		95A46AE417D378260068948B /* AnswerQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerQuestionVC.h; sourceTree = "<group>"; };
+		95A46AE517D378260068948B /* AnswerQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerQuestionVC.m; sourceTree = "<group>"; };
+		95A46AE717D378470068948B /* AnswerQAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerQAModel.h; sourceTree = "<group>"; };
+		95A46AE817D378470068948B /* AnswerQAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerQAModel.m; sourceTree = "<group>"; };
+		95A46AEA17D380CC0068948B /* CatAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatAnswerCell.h; sourceTree = "<group>"; };
+		95A46AEB17D380CC0068948B /* CatAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatAnswerCell.m; sourceTree = "<group>"; };
+		95A46AED17D381690068948B /* CatAnswerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatAnswerModel.h; sourceTree = "<group>"; };
+		95A46AEE17D381690068948B /* CatAnswerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatAnswerModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +235,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				95A46AE317D377D30068948B /* 答题 */,
 				95A46ADF17D36DD40068948B /* 查看答疑 */,
 				95A46ACC17D2EA0F0068948B /* 照片压缩 */,
 				9586516E17D08DF8000DD252 /* 录音 */,
@@ -460,9 +473,25 @@
 			children = (
 				95A46AE017D36DFC0068948B /* CatAnswerVC.h */,
 				95A46AE117D36DFC0068948B /* CatAnswerVC.m */,
+				95A46AEA17D380CC0068948B /* CatAnswerCell.h */,
+				95A46AEB17D380CC0068948B /* CatAnswerCell.m */,
+				95A46AED17D381690068948B /* CatAnswerModel.h */,
+				95A46AEE17D381690068948B /* CatAnswerModel.m */,
 			);
 			name = "查看答疑";
 			path = "PlayerTest/查看答疑";
+			sourceTree = "<group>";
+		};
+		95A46AE317D377D30068948B /* 答题 */ = {
+			isa = PBXGroup;
+			children = (
+				95A46AE417D378260068948B /* AnswerQuestionVC.h */,
+				95A46AE517D378260068948B /* AnswerQuestionVC.m */,
+				95A46AE717D378470068948B /* AnswerQAModel.h */,
+				95A46AE817D378470068948B /* AnswerQAModel.m */,
+			);
+			name = "答题";
+			path = "PlayerTest/答题";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -596,6 +625,10 @@
 				95A46AD717D2EA0F0068948B /* UIImage+RoundedCorner.m in Sources */,
 				95A46AD817D2EA0F0068948B /* UIImage-Extensions.m in Sources */,
 				95A46AE217D36DFC0068948B /* CatAnswerVC.m in Sources */,
+				95A46AE617D378260068948B /* AnswerQuestionVC.m in Sources */,
+				95A46AE917D378470068948B /* AnswerQAModel.m in Sources */,
+				95A46AEC17D380CC0068948B /* CatAnswerCell.m in Sources */,
+				95A46AEF17D381690068948B /* CatAnswerModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
