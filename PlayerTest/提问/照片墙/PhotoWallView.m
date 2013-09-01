@@ -45,20 +45,23 @@
     _lastButtonTag = (_lineNumber - 1)* _photoNumOfLine + _modPhotoNum  + BASEBUTTONTAG;
     NSLog(@"lastTag is %d",_lastButtonTag);
     AskUploadView *  photo = (AskUploadView*)[self viewWithTag:_lastButtonTag];
-    photo.imageView.image = [UIImage imageNamed:@"test10@2x.png"];
+    photo.imageView.image = [UIImage imageNamed:@"ask_add_picture"];
+    photo.delButton.hidden = YES;
     [self setNeedsDisplay];
 }
 -(void)addPhoto:(id)sender
 {
     NSLog(@"addPhoto");
+    [[NSNotificationCenter defaultCenter] postNotificationName:Add_Ask_Pic object:sender];
 }
 -(void)createSingleAddButton
 {
     self.userInteractionEnabled = YES;
-    self.frame = CGRectMake(0, 0, 320, 100);
-    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(110, 10, 100, 80)];
-    [button setBackgroundColor:[UIColor blueColor]];
-    [button setTitle:@"添加图片" forState:UIControlStateNormal];
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(_widthForSepPhoto, _heightForSepPhoto, _widthOfPhoto, _heightOfPhoto)];
+//    [button setBackgroundColor:[UIColor blueColor]];
+//    [button setTitle:@"添加图片" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"ask_add_picture"] forState:UIControlStateNormal];
+     [button setImage:[UIImage imageNamed:@"ask_add_picture"] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
     [button release];

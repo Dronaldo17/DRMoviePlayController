@@ -8,4 +8,5 @@
 
 #import "ButtonsView.h"
 @interface PhotoWallView : ButtonsView
+
 @end

@@ -64,13 +64,16 @@
     NSLog(@"modPhotoNum is %d",_modPhotoNum);
     NSLog(@"photoNumber is %d",photoNumber);
     NSLog(@"_lineNumber is %d",_lineNumber);
+    NSLog(@"_dateaArray is %@",_dataArray);
     for (int j = 0; j < _lineNumber; j++) {
         for (int i = 0;i < _photoNumOfLine; i++) {
             AskUploadView * photo = [[AskUploadView alloc] initWithUserInfo:nil];
             photo.frame = CGRectMake(_widthForSepPhoto+(i*(_widthForSepPhoto + _widthOfPhoto)),((_heightForSepPhoto+_heightOfPhoto)*(j+1)-_heightOfPhoto), _widthOfPhoto, _heightOfPhoto);
             photo.photoCount = photoNumber;
-//            [photo addImageAndTouch:9];
             photo.tag = j * _photoNumOfLine  + BASEBUTTONTAG + i ;
+            
+            [photo addImageAndTouch:photo.tag photoArray:_dataArray];
+
             [photo setBackgroundColor:[UIColor clearColor]];
             NSLog(@"imageView.tag is %d",photo.tag);
             [self addSubview:photo];
@@ -81,6 +84,7 @@
 /**Author:窦静轩 Description:初始化照片墙 photo*/
 -(void)doInitWithPhotoNumbers:(NSMutableArray*)dataArray
 {
+    RELEASE_SAFELY(_dataArray);
     _dataArray = dataArray;
     [_dataArray retain];
     NSUInteger photoNumber = [dataArray count];
@@ -98,16 +102,18 @@
     _photoWallHeight = [self calPhotoWallHeight:photoNumber];
     [self createPhotoWithPhotoNum:photoNumber];
     NSLog(@"_PhotoWallHeight is %f",_photoWallHeight);
-    self.frame = CGRectMake(0, 100, _photoWallWidth, _photoWallHeight);
+    self.frame = CGRectMake(0, self.frame.origin.y, _photoWallWidth, _photoWallHeight);
 //    self.backgroundColor = [UIColor blueColor];
 }
 -(void)refleshDataWithPhotoNumber:(NSMutableArray *)dataArray
 {
-    if (_dataArray) {
-        [_dataArray release];
-    }
+    RELEASE_SAFELY(_dataArray);
     NSArray * viewArray = [self subviews];
-    [self removeConstraints:viewArray];
+//    [self removeConstraints:viewArray];
+    for (int i = 0; i < viewArray.count; i++) {
+        id view = [viewArray objectAtIndex:i];
+        [view removeFromSuperview];
+    }
     [self doInitWithPhotoNumbers:dataArray];
 }
 /*

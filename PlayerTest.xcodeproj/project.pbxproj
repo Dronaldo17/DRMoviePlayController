@@ -71,6 +71,16 @@
 		9586517D17D099F3000DD252 /* ask_record_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586517B17D099F2000DD252 /* ask_record_button.png */; };
 		9586517E17D099F3000DD252 /* ask_record.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586517C17D099F3000DD252 /* ask_record.png */; };
 		95A46ABE17D0FE4F0068948B /* ask_record_delbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */; };
+		95A46AC217D21C600068948B /* askv_voice_play1.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ABF17D21C600068948B /* askv_voice_play1.png */; };
+		95A46AC317D21C600068948B /* askv_voice_play2.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46AC017D21C600068948B /* askv_voice_play2.png */; };
+		95A46AC417D21C600068948B /* askv_voice_play3.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46AC117D21C600068948B /* askv_voice_play3.png */; };
+		95A46AC717D24AF60068948B /* AskPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AC617D24AF60068948B /* AskPictureModel.m */; };
+		95A46AC917D250CE0068948B /* ask_add_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46AC817D250CE0068948B /* ask_add_picture.png */; };
+		95A46AD517D2EA0F0068948B /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46ACE17D2EA0F0068948B /* UIImage+Alpha.m */; };
+		95A46AD617D2EA0F0068948B /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AD017D2EA0F0068948B /* UIImage+Resize.m */; };
+		95A46AD717D2EA0F0068948B /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AD217D2EA0F0068948B /* UIImage+RoundedCorner.m */; };
+		95A46AD817D2EA0F0068948B /* UIImage-Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AD417D2EA0F0068948B /* UIImage-Extensions.m */; };
+		95A46ADA17D340710068948B /* ask_submit_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46AD917D340710068948B /* ask_submit_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +177,22 @@
 		9586517B17D099F2000DD252 /* ask_record_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record_button.png; sourceTree = "<group>"; };
 		9586517C17D099F3000DD252 /* ask_record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record.png; sourceTree = "<group>"; };
 		95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_record_delbutton.png; sourceTree = "<group>"; };
+		95A46ABF17D21C600068948B /* askv_voice_play1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = askv_voice_play1.png; sourceTree = "<group>"; };
+		95A46AC017D21C600068948B /* askv_voice_play2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = askv_voice_play2.png; sourceTree = "<group>"; };
+		95A46AC117D21C600068948B /* askv_voice_play3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = askv_voice_play3.png; sourceTree = "<group>"; };
+		95A46AC517D24AF60068948B /* AskPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskPictureModel.h; sourceTree = "<group>"; };
+		95A46AC617D24AF60068948B /* AskPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskPictureModel.m; sourceTree = "<group>"; };
+		95A46AC817D250CE0068948B /* ask_add_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_add_picture.png; sourceTree = "<group>"; };
+		95A46ACB17D257530068948B /* Marcos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Marcos.h; sourceTree = "<group>"; };
+		95A46ACD17D2EA0F0068948B /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		95A46ACE17D2EA0F0068948B /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		95A46ACF17D2EA0F0068948B /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		95A46AD017D2EA0F0068948B /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		95A46AD117D2EA0F0068948B /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		95A46AD217D2EA0F0068948B /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		95A46AD317D2EA0F0068948B /* UIImage-Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-Extensions.h"; sourceTree = "<group>"; };
+		95A46AD417D2EA0F0068948B /* UIImage-Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-Extensions.m"; sourceTree = "<group>"; };
+		95A46AD917D340710068948B /* ask_submit_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_submit_button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +216,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				95A46ACC17D2EA0F0068948B /* 照片压缩 */,
 				9586516E17D08DF8000DD252 /* 录音 */,
 				9586514317D0354A000DD252 /* 提问 */,
 				9586512C17CF4C3E000DD252 /* 图片资源 */,
@@ -329,6 +356,11 @@
 		9586512C17CF4C3E000DD252 /* 图片资源 */ = {
 			isa = PBXGroup;
 			children = (
+				95A46AD917D340710068948B /* ask_submit_button.png */,
+				95A46AC817D250CE0068948B /* ask_add_picture.png */,
+				95A46ABF17D21C600068948B /* askv_voice_play1.png */,
+				95A46AC017D21C600068948B /* askv_voice_play2.png */,
+				95A46AC117D21C600068948B /* askv_voice_play3.png */,
 				95A46ABD17D0FE4F0068948B /* ask_record_delbutton.png */,
 				9586517B17D099F2000DD252 /* ask_record_button.png */,
 				9586517C17D099F3000DD252 /* ask_record.png */,
@@ -364,6 +396,7 @@
 				9586514B17D03763000DD252 /* AskViewVC.xib */,
 				9586514417D0355F000DD252 /* AskViewController.h */,
 				9586514517D0355F000DD252 /* AskViewController.m */,
+				95A46ACB17D257530068948B /* Marcos.h */,
 			);
 			name = "提问";
 			path = "PlayerTest/提问";
@@ -378,6 +411,8 @@
 				9586515E17D07C10000DD252 /* PhotoWallView.m */,
 				9586516117D07D97000DD252 /* AskUploadView.h */,
 				9586516217D07D97000DD252 /* AskUploadView.m */,
+				95A46AC517D24AF60068948B /* AskPictureModel.h */,
+				95A46AC617D24AF60068948B /* AskPictureModel.m */,
 			);
 			path = "照片墙";
 			sourceTree = "<group>";
@@ -392,6 +427,22 @@
 			);
 			name = "录音";
 			path = "PlayerTest/录音";
+			sourceTree = "<group>";
+		};
+		95A46ACC17D2EA0F0068948B /* 照片压缩 */ = {
+			isa = PBXGroup;
+			children = (
+				95A46ACD17D2EA0F0068948B /* UIImage+Alpha.h */,
+				95A46ACE17D2EA0F0068948B /* UIImage+Alpha.m */,
+				95A46ACF17D2EA0F0068948B /* UIImage+Resize.h */,
+				95A46AD017D2EA0F0068948B /* UIImage+Resize.m */,
+				95A46AD117D2EA0F0068948B /* UIImage+RoundedCorner.h */,
+				95A46AD217D2EA0F0068948B /* UIImage+RoundedCorner.m */,
+				95A46AD317D2EA0F0068948B /* UIImage-Extensions.h */,
+				95A46AD417D2EA0F0068948B /* UIImage-Extensions.m */,
+			);
+			name = "照片压缩";
+			path = "PlayerTest/照片压缩";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,6 +529,11 @@
 				9586517D17D099F3000DD252 /* ask_record_button.png in Resources */,
 				9586517E17D099F3000DD252 /* ask_record.png in Resources */,
 				95A46ABE17D0FE4F0068948B /* ask_record_delbutton.png in Resources */,
+				95A46AC217D21C600068948B /* askv_voice_play1.png in Resources */,
+				95A46AC317D21C600068948B /* askv_voice_play2.png in Resources */,
+				95A46AC417D21C600068948B /* askv_voice_play3.png in Resources */,
+				95A46AC917D250CE0068948B /* ask_add_picture.png in Resources */,
+				95A46ADA17D340710068948B /* ask_submit_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +568,11 @@
 				9586516017D07C10000DD252 /* PhotoWallView.m in Sources */,
 				9586516317D07D97000DD252 /* AskUploadView.m in Sources */,
 				9586517417D08DF8000DD252 /* POVoiceHUD.m in Sources */,
+				95A46AC717D24AF60068948B /* AskPictureModel.m in Sources */,
+				95A46AD517D2EA0F0068948B /* UIImage+Alpha.m in Sources */,
+				95A46AD617D2EA0F0068948B /* UIImage+Resize.m in Sources */,
+				95A46AD717D2EA0F0068948B /* UIImage+RoundedCorner.m in Sources */,
+				95A46AD817D2EA0F0068948B /* UIImage-Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
