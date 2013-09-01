@@ -134,7 +134,7 @@
 -(void)addAnswerView
 {
     //添加提问背景
-   _ansWerView = [[UIView alloc] initWithFrame:CGRectMake(150, 20, self.view.frame.size.height - 2*150, 650)];
+   _ansWerView = [[UIView alloc] initWithFrame:CGRectMake(150, 20, self.view.frame.size.height - 2*150, 600)];
     [_ansWerView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:_ansWerView];
 
@@ -145,7 +145,12 @@
     view.backgroundColor = [UIColor clearColor];
     [_ansWerView addSubview:view];
     
-    _topInputView = [[UIView alloc] initWithFrame:CGRectMake(0, _tmpFloat, _ansWerView.frame.size.width, 300)];
+    UIImageView * topLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 57, _ansWerView.frame.size.width, 5)];
+    topLineView.image = [UIImage imageNamed:@"ask_line"];
+    [_ansWerView addSubview:topLineView];
+    
+    
+    _topInputView = [[UIView alloc] initWithFrame:CGRectMake(0, _tmpFloat+2, _ansWerView.frame.size.width, 240)];
     [_topInputView setBackgroundColor:RGBCOLOR(241, 241, 241)];
     [_ansWerView addSubview:_topInputView];
     
@@ -184,21 +189,23 @@
 #pragma mark 添加输入框
 -(void)addInputView
 {
-    SSTextView * textView = [[SSTextView  alloc] initWithFrame:CGRectMake(20, 5, _ansWerView.frame.size.width - 2* 20, 150)];
-    _tmpFloat = 155;
+    SSTextView * textView = [[SSTextView  alloc] initWithFrame:CGRectMake(20, 5, _ansWerView.frame.size.width - 2* 20, 100)];
+    _tmpFloat = 110;
     textView.font = [UIFont boldSystemFontOfSize:20.0];
     textView.placeholder = @"请输入您要提出的问题";
     textView.placeholderColor = [UIColor grayColor];
-    textView.backgroundColor = [UIColor redColor];
+    textView.backgroundColor = [UIColor clearColor];
     [_topInputView addSubview:textView];
 }
 #pragma mark 添加富文本View
 -(void)addMediaSourceView
 {
-    UIImageView * topLineView = [[UIImageView alloc] initWithFrame:CGRectMake(20, _tmpFloat + 20, _ansWerView.frame.size.width - 2* 20 , 5)];
-    topLineView.image = [UIImage imageNamed:@"ask_line"];
+    UIImageView * topLineView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 130, _ansWerView.frame.size.width - 2* 20 , 5)];
+    topLineView.image = [UIImage imageNamed:@"ask_middle_line"];
+//    [topLineView setBackgroundColor:[UIColor redColor]];
     [_topInputView addSubview:topLineView];
     
+    [topLineView setBackgroundColor:[UIColor clearColor]];
 //   _photoArray = [NSMutableArray arrayWithObjects:@"1",@"0",@"1",@"2",nil];
 //    NSMutableArray * array = nil;
 	// Do any additional setup after loading the view, typically from a nib.
@@ -214,6 +221,11 @@
      _pwv.frame = CGRectMake(20, topLineView.frame.origin.y+topLineView.frame.size.height+5, 400, 90);
     NSLog(@"pwv.frame is %@",NSStringFromCGRect(_pwv.frame));
     [_topInputView addSubview:_pwv];
+    
+    UIImageView * middleView = [[UIImageView alloc] initWithFrame:CGRectMake(_ansWerView.frame.size.width/2-1.5, _pwv.frame.origin.y +5, 3, _pwv.frame.size.height-5)];
+    middleView.image = [UIImage imageNamed:@"ask_spearate_line"];
+    [_topInputView addSubview:middleView];
+    [middleView release];
     
     
     _recordButton = [[UIButton alloc] initWithFrame:CGRectMake( 520,topLineView.frame.origin.y+topLineView.frame.size.height +10,160, 80)];
@@ -234,6 +246,14 @@
     
     [_recordButton addTarget:self action:@selector(recordButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    UIImageView * bottomLineView = [[UIImageView alloc] initWithFrame:CGRectMake(20, _tmpFloat + 20, _ansWerView.frame.size.width - 2* 20 , 5)];
+    bottomLineView.image = [UIImage imageNamed:@"ask_line"];
+//    20, _tmpFloat + 20, _ansWerView.frame.size.width - 2* 20 , 5
+    bottomLineView.frame = CGRectMake(20, 238, _ansWerView.frame.size.width - 2* 20, 5);
+    [_topInputView addSubview:bottomLineView];
+ 
+    [bottomLineView release];
     [topLineView release];
 }
 #pragma mark 添加提交按钮
