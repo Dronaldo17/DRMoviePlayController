@@ -88,6 +88,10 @@
     //添加录音的View
     [self addVoiceHud];
     
+    
+    //添加提交button
+    [self addSubmitButton];
+    
     //添加通知
     [self addNotifaction];
 
@@ -235,9 +239,22 @@
 #pragma mark 添加提交按钮
 -(void)addSubmitButton
 {
-    UIButton * submitButton  =[[UIButton alloc] initWithFrame:CGRectMake(_ansWerView.frame.size.width - 185, _topInputView.frame.origin.y + 10, 184, 48)];
+    UIButton * submitButton  =[[UIButton alloc] initWithFrame:CGRectMake(_ansWerView.frame.size.width/2 - 90, _topInputView.frame.origin.y+_topInputView.frame.size.height + 10, 180, 50)];
     [submitButton setBackgroundImage:[UIImage imageNamed:@"ask_submit_button"] forState:UIControlStateNormal];
     [submitButton setBackgroundImage:[UIImage imageNamed:@"ask_submit_button"] forState:UIControlStateNormal];
+    
+    [submitButton setTitle:@"提  交" forState:UIControlStateNormal];
+    [submitButton setTitle:@"提  交" forState:UIControlStateHighlighted];
+    
+    submitButton.titleLabel.font = [UIFont boldSystemFontOfSize:24.0];
+
+    [submitButton addTarget:self action:@selector(submitButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_ansWerView addSubview:submitButton];
+}
+#pragma mark 提交按钮
+-(void)submitButtonClicked:(id)sender
+{
+    NSLog(@"提交按钮");
 }
 #pragma mark 删除按钮按钮
 -(void)delVoiceButton:(id)sender
