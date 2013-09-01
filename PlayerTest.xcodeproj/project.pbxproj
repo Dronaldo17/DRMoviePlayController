@@ -83,6 +83,7 @@
 		95A46ADA17D340710068948B /* ask_submit_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46AD917D340710068948B /* ask_submit_button.png */; };
 		95A46ADC17D368350068948B /* ask_spearate_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ADB17D368340068948B /* ask_spearate_line.png */; };
 		95A46ADE17D36CEA0068948B /* ask_middle_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A46ADD17D36CEA0068948B /* ask_middle_line.png */; };
+		95A46AE217D36DFC0068948B /* CatAnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A46AE117D36DFC0068948B /* CatAnswerVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +198,8 @@
 		95A46AD917D340710068948B /* ask_submit_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_submit_button.png; sourceTree = "<group>"; };
 		95A46ADB17D368340068948B /* ask_spearate_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_spearate_line.png; sourceTree = "<group>"; };
 		95A46ADD17D36CEA0068948B /* ask_middle_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_middle_line.png; sourceTree = "<group>"; };
+		95A46AE017D36DFC0068948B /* CatAnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatAnswerVC.h; sourceTree = "<group>"; };
+		95A46AE117D36DFC0068948B /* CatAnswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatAnswerVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,7 @@
 		9535688617CAE98C00F10339 = {
 			isa = PBXGroup;
 			children = (
+				95A46ADF17D36DD40068948B /* 查看答疑 */,
 				95A46ACC17D2EA0F0068948B /* 照片压缩 */,
 				9586516E17D08DF8000DD252 /* 录音 */,
 				9586514317D0354A000DD252 /* 提问 */,
@@ -451,6 +455,16 @@
 			path = "PlayerTest/照片压缩";
 			sourceTree = "<group>";
 		};
+		95A46ADF17D36DD40068948B /* 查看答疑 */ = {
+			isa = PBXGroup;
+			children = (
+				95A46AE017D36DFC0068948B /* CatAnswerVC.h */,
+				95A46AE117D36DFC0068948B /* CatAnswerVC.m */,
+			);
+			name = "查看答疑";
+			path = "PlayerTest/查看答疑";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -581,6 +595,7 @@
 				95A46AD617D2EA0F0068948B /* UIImage+Resize.m in Sources */,
 				95A46AD717D2EA0F0068948B /* UIImage+RoundedCorner.m in Sources */,
 				95A46AD817D2EA0F0068948B /* UIImage-Extensions.m in Sources */,
+				95A46AE217D36DFC0068948B /* CatAnswerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
